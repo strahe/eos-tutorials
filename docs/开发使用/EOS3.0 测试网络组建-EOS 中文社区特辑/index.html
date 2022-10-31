@@ -1,0 +1,1321 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.1, mkdocs-material-8.5.7">
+    
+    
+      
+        <title>EOS3.0测试网络组建-EOS中文社区特辑 - EOS Tutorials</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.20d9efc8.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#eos30-eos" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="EOS Tutorials" class="md-header__button md-logo" aria-label="EOS Tutorials" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            EOS Tutorials
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              EOS3.0测试网络组建-EOS中文社区特辑
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="EOS Tutorials" class="md-nav__button md-logo" aria-label="EOS Tutorials" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    EOS Tutorials
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        eos-tutorials
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Cleos
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Cleos" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Cleos
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cleos/EOS%20Dawn%203.0%20cleos%20%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/" class="md-nav__link">
+        创建缺省wallet
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cleos/cleos%20%E5%91%BD%E4%BB%A4%E5%A4%A7%E5%85%A8%E4%B9%8B%20wallet%20%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        cleos 钱包命令
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          小白入门
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="小白入门" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          小白入门
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%B0%8F%E7%99%BD%E5%85%A5%E9%97%A8/EOS%20%E5%AE%89%E8%A3%85%E6%9C%AC%E5%9C%B0%E7%8E%AF%E5%A2%83%EF%BC%8C%E5%B9%B6%E5%AE%9E%E7%8E%B0%E5%8F%91%E5%B8%81%E8%BD%AC%E8%B4%A6%E7%AD%89%E5%8A%9F%E8%83%BD/" class="md-nav__link">
+        EOS 安装本地环境，并实现发币转账等功能
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%B0%8F%E7%99%BD%E5%85%A5%E9%97%A8/%E5%9F%BA%E4%BA%8E%20linux%20%E7%9A%84%20eos%20%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84%E5%9D%91%20%281%29/" class="md-nav__link">
+        基于 linux 的 eos 开发中的坑 (1)
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          开发使用
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="开发使用" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          开发使用
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../EOS%20%E5%B8%90%E6%88%B7%E6%9D%83%E9%99%90%E6%93%8D%E4%BD%9C%EF%BC%8D%EF%BC%8D%E4%BD%A0%E6%89%BE%E4%B8%8D%E5%88%B0%E7%9A%84%E5%B9%B2%E8%B4%A7%20%28%E5%8E%9F%E5%88%9B%29%20%E7%BB%AD%E9%9B%86-EOS%203.0/" class="md-nav__link">
+        EOS 帐户权限 3.0
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../EOS%20%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E4%B9%8B-%E6%9D%83%E9%99%90%E7%9A%84%E4%BD%BF%E7%94%A8%20%28%E4%BD%A0%E7%BB%9D%E5%AF%B9%E6%89%BE%E4%B8%8D%E5%88%B0%E7%9A%84%E5%B9%B2%E8%B4%A7%29/" class="md-nav__link">
+        EOS 权限管理之 权限的使用 (你绝对找不到的干货)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          EOS3.0测试网络组建-EOS中文社区特辑
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        EOS3.0测试网络组建-EOS中文社区特辑
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    摘要
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#eos30" class="md-nav__link">
+    EOS3.0配置
+  </a>
+  
+    <nav class="md-nav" aria-label="EOS3.0配置">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configini" class="md-nav__link">
+    config.ini的设置
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#genesisjson" class="md-nav__link">
+    genesis.json配置
+  </a>
+  
+    <nav class="md-nav" aria-label="genesis.json配置">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#genesisjsoninitial_keyconfiginieosio" class="md-nav__link">
+    注意：genesis.json文件的initial_key必须和config.ini文件中的eosio的公匙一样，不然会导致网络运行不起来。
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    到此准备工作已经完成。
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    测试网络的初始化
+  </a>
+  
+    <nav class="md-nav" aria-label="测试网络的初始化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    创建钱包导入密匙
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#eosiobios" class="md-nav__link">
+    发布eosio.bios智能合约
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    发行代币
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bp" class="md-nav__link">
+    设置BP
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bp_1" class="md-nav__link">
+    给BP发放代币
+  </a>
+  
+    <nav class="md-nav" aria-label="给BP发放代币">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    查看账户余额
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../EOSIO%204.0%E6%B5%8B%E8%AF%95%E7%BD%91%E7%BB%9C%E5%90%AF%E5%8A%A8%E6%95%99%E7%A8%8B/" class="md-nav__link">
+        EOSIO 4.0测试网络启动教程
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../EOSIO%20%E8%BD%AC%E5%B8%90%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+        EOSIO 转帐详解
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../EOSIO3.0%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/" class="md-nav__link">
+        EOSIO3.0数据库使用指南
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../EOS%E5%AD%A6%E4%B9%A0%E9%98%B6%E6%AE%B5%E6%80%A7%E6%80%BB%E7%BB%93/" class="md-nav__link">
+        EOS学习阶段性总结
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          开发工具
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="开发工具" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          开发工具
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/EOS%20%E5%BC%80%E5%8F%91%E7%BB%88%E6%9E%81%E7%A5%9E%E5%99%A8%EF%BC%8Dvscode%20%28%E4%BD%A0%E7%BB%9D%E5%AF%B9%E6%89%BE%E4%B8%8D%E5%88%B0%E7%9A%84%E5%B9%B2%E8%B4%A7%29/" class="md-nav__link">
+        EOS开发终极神器－vscode(你绝对找不到的干货)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/Qt%20Creator%20%E5%BC%80%E5%8F%91%20EOS%203.0%20%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/" class="md-nav__link">
+        下载和安装Qt Creator
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/%E8%B4%A1%E7%8C%AE%E4%B8%80%E4%B8%AA%E6%B5%8B%E8%AF%95%E5%9F%BA%E7%A1%80%E5%8A%9F%E8%83%BD%E7%9A%84%20shell%20%E8%84%9A%E6%9C%AC/" class="md-nav__link">
+        贡献一个测试基础功能的 shell 脚本
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6">
+          智能合约
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="智能合约" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          智能合约
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/EOS%20%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E6%A8%A1%E6%9D%BF%20%28%E4%BA%8C%29/" class="md-nav__link">
+        EOS 智能合约模板 (二)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/EOS%20%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E6%A8%A1%E6%9D%BF/" class="md-nav__link">
+        1.  支持类型说明和调用实例
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/EOS3.0-HelloWorld%E6%95%99%E7%A8%8B/" class="md-nav__link">
+        EOSIO3.0 hello world 从0到1
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/EOS3.0-%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/" class="md-nav__link">
+        EOSIO 3.0 使用指南
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/EOS3.0-%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/" class="md-nav__link">
+        EOSIO 智能合约
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/EOSIO%20%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E6%95%B0%E6%8D%AE%E5%BA%93%E6%BC%94%E7%BB%83/" class="md-nav__link">
+        EOSIO 智能合约数据库演练
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/dice%20%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E5%BA%94%E8%AF%A5%E8%BF%99%E4%B9%88%E7%8E%A9/" class="md-nav__link">
+        1. dice 玩法说明
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/%E5%BF%83%E5%BF%83%E5%BF%B5%E5%BF%B5%E7%9A%84%20Lover%20Wall%203.0%E7%89%88%E6%9C%AC%E6%9D%A5%E4%BA%86%28%E5%8E%9F%E5%88%9B%29/" class="md-nav__link">
+        心心念念的 Lover Wall 3.0版本来了(原创)
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7">
+          精品文章
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="精品文章" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          精品文章
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%B2%BE%E5%93%81%E6%96%87%E7%AB%A0/%E4%B8%80%E4%B8%AA%E9%92%88%E5%AF%B9EOSIO%E5%8C%BA%E5%9D%97%E7%94%9F%E4%BA%A7%E5%91%98%E7%9A%84DDOS%E6%94%BB%E5%87%BB%E7%9A%84%E7%BC%93%E8%A7%A3%E6%96%B9%E6%A1%88/" class="md-nav__link">
+        一个针对EOSIO区块生产员的DDOS攻击的缓解方案
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    摘要
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#eos30" class="md-nav__link">
+    EOS3.0配置
+  </a>
+  
+    <nav class="md-nav" aria-label="EOS3.0配置">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configini" class="md-nav__link">
+    config.ini的设置
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#genesisjson" class="md-nav__link">
+    genesis.json配置
+  </a>
+  
+    <nav class="md-nav" aria-label="genesis.json配置">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#genesisjsoninitial_keyconfiginieosio" class="md-nav__link">
+    注意：genesis.json文件的initial_key必须和config.ini文件中的eosio的公匙一样，不然会导致网络运行不起来。
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    到此准备工作已经完成。
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    测试网络的初始化
+  </a>
+  
+    <nav class="md-nav" aria-label="测试网络的初始化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    创建钱包导入密匙
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#eosiobios" class="md-nav__link">
+    发布eosio.bios智能合约
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    发行代币
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bp" class="md-nav__link">
+    设置BP
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bp_1" class="md-nav__link">
+    给BP发放代币
+  </a>
+  
+    <nav class="md-nav" aria-label="给BP发放代币">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    查看账户余额
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  <!--
+  Copyright (c) 2016-2022 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Tags -->
+
+
+<!-- Actions -->
+
+
+<!--
+  Hack: check whether the content contains a h1 headline. If it doesn't, the
+  page title (or respectively site name) is used as the main headline.
+-->
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3023358183033336"
+     crossorigin="anonymous"></script>
+<!-- eos-tutorials -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-3023358183033336"
+     data-ad-slot="3442397541"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<!-- Page content -->
+<h1 id="eos30-eos">EOS3.0测试网络组建-EOS中文社区特辑</h1>
+<blockquote>
+<p>声明：本文由EOS中文社区原创首发，转载请标明原文出处．</p>
+</blockquote>
+<h2 id="_1">摘要</h2>
+<p>EOS 3.0已经发布，EOS中文社区决定组建一个测试网络用于EOS3.0的开发．这篇文章主要讲解EOS测试网络组建的过程，其中包括EOS的节点配置，运行，组网等，关于EOS3.0的安装，EOS中文社区(eosfans.io)会上传国内Docker镜像，及相关教程，本文不再赘述．</p>
+<h2 id="eos30">EOS3.0配置</h2>
+<h3 id="configini">config.ini的设置</h3>
+<p>由于整个网络的运行需要一个节点先产生创世区块，进行区块链网络的初始化。所以该节点在链静默条件下需要能生产区块, 所以要将<code>enable-stale-production</code>配置项设置为<code>true</code>.</p>
+<p>EOS区块链的创始账号是eosio，由于<code>eosio</code>的密匙，已经公布出来，所以在开启网络之前我们要修改eosio的密匙对。</p>
+<p>密匙对可以在本地生成，也可以使用<a href="https://eosfans.io/tools/generate/">生成工具</a>生成。把密匙对改为所生成的密匙对。</p>
+<p>例如你生成的密匙对为：</p>
+<pre><code>私钥：xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+公钥：EOS5tfo9VMQcpjK3BWwzKQDP9Z4Xb3G5SWQVBZu2yP6e4hpH2A9iw
+</code></pre>
+<p>将密匙加入配置文件：</p>
+<pre><code>private-key = [&quot;公钥&quot;,&quot;私钥&quot;]
+</code></pre>
+<p>其他的配置如下：</p>
+<pre><code>get-transactions-time-limit = 3
+genesis-json = “genesis.json”
+block-log-dir = &quot;blocks&quot;
+shared-file-dir = &quot;blockchain&quot;
+shared-file-size = 8192
+http-server-address = 0.0.0.0:8888
+access-control-allow-credentials = false
+# 这里填写你自己的服务器地址和监听的端口, 一般是 IP:9876
+p2p-server-address =
+agent-name = &quot;&quot;
+send-whole-blocks = 1
+allowed-connection = any
+log-level-net-plugin = info
+max-clients = 25
+connection-cleanup-period = 30
+network-version-match = 0
+enable-stale-production = true
+required-participation = 33
+# 这里填写一对密钥对, 建议用全新的: https://eosfans.io/tools/generate/
+private-key = [&quot;EOS5tfo9VMQcpjK3BWwzKQDP9Z4Xb3G5SWQVBZu2yP6e4hpH2A9iw&quot;,&quot;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&quot;]
+plugin = eosio::producer_plugin
+plugin = eosio::chain_api_plugin
+plugin = eosio::wallet_api_plugin
+plugin = eosio::account_history_api_plugin
+plugin = eosio::http_plugin
+# 这里填写节点用户名
+producer-name =
+</code></pre>
+<h3 id="genesisjson">genesis.json配置</h3>
+<p>genesis.json的配置如下：</p>
+<pre><code>{
+  &quot;initial_timestamp&quot;: &quot;2018-04-06T12:00:00.000&quot;,
+  &quot;initial_key&quot;: &quot;EOS5tfo9VMQcpjK3BWwzKQDP9Z4Xb3G5SWQVBZu2yP6e4hpH2A9iw&quot;,
+  &quot;initial_configuration&quot;: {
+    &quot;base_per_transaction_net_usage&quot;: 100,
+    &quot;base_per_transaction_cpu_usage&quot;: 500,
+    &quot;base_per_action_cpu_usage&quot;: 1000,
+    &quot;base_setcode_cpu_usage&quot;: 2097152,
+    &quot;per_signature_cpu_usage&quot;: 100000,
+    &quot;per_lock_net_usage&quot;: 32,
+    &quot;context_free_discount_cpu_usage_num&quot;: 20,
+    &quot;context_free_discount_cpu_usage_den&quot;: 100,
+    &quot;max_transaction_cpu_usage&quot;: 10485760,
+    &quot;max_transaction_net_usage&quot;: 104857,
+    &quot;max_block_cpu_usage&quot;: 104857600,
+    &quot;target_block_cpu_usage_pct&quot;: 1000,
+    &quot;max_block_net_usage&quot;: 1048576,
+    &quot;target_block_net_usage_pct&quot;: 1000,
+    &quot;max_transaction_lifetime&quot;: 3600,
+    &quot;max_transaction_exec_time&quot;: 0,
+    &quot;max_authority_depth&quot;: 6,
+    &quot;max_inline_depth&quot;: 4,
+    &quot;max_inline_action_size&quot;: 4096,
+    &quot;max_generated_transaction_count&quot;: 16
+  },
+  &quot;initial_chain_id&quot;: &quot;0000000000000000000000000000000000000000000000000000000000000000&quot;
+}
+</code></pre>
+<h4 id="genesisjsoninitial_keyconfiginieosio">注意：genesis.json文件的<code>initial_key</code>必须和config.ini文件中的eosio的公匙一样，不然会导致网络运行不起来。</h4>
+<h4 id="_2">到此准备工作已经完成。</h4>
+<blockquote>
+<p>接下来把网络运行起来，我们来进行下一步的设置。</p>
+</blockquote>
+<h2 id="_3">测试网络的初始化</h2>
+<h3 id="_4">创建钱包导入密匙</h3>
+<p>首先我们需要创建一个钱包来存eosio账户的密匙。　　　</p>
+<pre><code>cleos wallet create -n eosfans
+</code></pre>
+<p>执行结果会返回钱包的密匙如下：</p>
+<pre><code>Creating wallet: eosfans
+Save password to use in the future to unlock this wallet.
+Without password imported keys will not be retrievable.
+&quot;PW5KJMZ8mneheKXuneuVHL6YWxsipsqmr5yPvmm4nFG5N5bQRvswN&quot;
+</code></pre>
+<p>这里需要保存好钱包的密匙，然后把eosio的密匙导入钱包：</p>
+<pre><code>cleos wallet import -n eosfans xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+</code></pre>
+<h3 id="eosiobios">发布eosio.bios智能合约</h3>
+<p>发布智能合约时请保持钱包在打开状态，如果钱包锁了可以用，需先打开钱包，命令如下：</p>
+<pre><code>cleos wallet open -n eosfans
+cleos wallet unlock -n eosfans
+Password:这里输入密码
+</code></pre>
+<p>接下来我们就可以发布智能合约，命令如下：</p>
+<pre><code>cleos set contract eosio contracts/eosio.bios
+</code></pre>
+<p>此时，智能合约发布完成，可以用eosio主账号来创建新的账号。</p>
+<h3 id="_5">发行代币</h3>
+<ol>
+<li>创建eosio.token账号，命令如下：</li>
+</ol>
+<pre><code>cleos create account eosio eosio.token public_key public_key
+</code></pre>
+<ol>
+<li>将eosio.token的私匙导入钱包。</li>
+<li>发布代币合约：</li>
+</ol>
+<pre><code>cleos set contract eosio.token contracts/eosio.token
+</code></pre>
+<p>结果如下：</p>
+<pre><code>Reading WAST...
+Assembling WASM...
+Publishing contract...
+executed transaction: 924fc886136a604f36e726e36cea4324e4949c457077181d30667af5e5a696fd  8024 bytes  2200576 cycles
+#         eosio &lt;= eosio::setcode               {&quot;account&quot;:&quot;eosio.token&quot;,&quot;vmtype&quot;:0,&quot;vmversion&quot;:0,&quot;code&quot;:&quot;0061736d01000000018a011660067f7e7f7f7f7f0060057f7...
+#         eosio &lt;= eosio::setabi                {&quot;account&quot;:&quot;test&quot;,&quot;abi&quot;:{&quot;types&quot;:[],&quot;structs&quot;:[{&quot;name&quot;:&quot;transfer&quot;,&quot;base&quot;:&quot;&quot;,&quot;fields&quot;:[{&quot;name&quot;:&quot;from&quot;...
+</code></pre>
+<ol>
+<li>创建代币：</li>
+</ol>
+<pre><code>cleos push action eosio.token create '[&quot;eosio&quot;, &quot;10000000000.0000 EOS&quot;,0,0,0]' -p eosio.token
+</code></pre>
+<p>出现以下结果，就说明代币成功了：</p>
+<pre><code>executed transaction: 0a00766ada9f0dee409defce661ad70d9beb2d78ca2f745c7c7ab0efec6649fc  248 bytes  104448 cycles
+#          eosio &lt;= eosio.token::create                 {&quot;issuer&quot;:&quot;eosio&quot;,&quot;maximum_supply&quot;:&quot;10000000000.0000 EOS&quot;,&quot;can_freeze&quot;:0,&quot;can_recall&quot;:0,&quot;can_whitelis...
+</code></pre>
+<ol>
+<li>发布代币：</li>
+</ol>
+<pre><code>cleos push action eosio.token issue '[&quot;eosio&quot;,&quot;1000000000.0000 EOS&quot;, &quot;issue&quot;]' -p eosio
+</code></pre>
+<p>此时在网络中已经存在了十亿个EOS代币。</p>
+<h3 id="bp">设置BP</h3>
+<ol>
+<li>创建BP（Block Producer）账号</li>
+</ol>
+<p>创建BP账号，账号是用来设BP的，创建账号这里就不在赘述。（BP：区块生产者）</p>
+<ol>
+<li>设置BP</li>
+</ol>
+<p>设置BP的命令如下：</p>
+<pre><code>cleos push action eosio setprods '{&quot;version&quot;:6, &quot;producers&quot;:[{&quot;producer_name&quot;:&quot;eostea&quot;,&quot;block_signing_key&quot;:&quot;EOS5wMFMPiD6qbKSZQpJFdEpzvY2yC2o6XLsg97gPPrYHbW4KovjV&quot;}]}' -p eosio
+</code></pre>
+<p>结果如下：</p>
+<pre><code>executed transaction: 9b05ff1d246d44cc6c3757f16de093bf2346531d04314d0378cbd2c155d94cae  568 bytes  117760 cycles
+#         eosio &lt;= eosio::setprods              {&quot;version&quot;:6,&quot;producers&quot;:[{&quot;producer_name&quot;:&quot;eostea2&quot;,&quot;block_signing_key&quot;:&quot;EOS54stgvUjdSwn8jpLiW1AucR...
+</code></pre>
+<h3 id="bp_1">给BP发放代币</h3>
+<pre><code>cleos push action eosio transfer '[&quot;eostea&quot;,&quot;100000.0000 EOS&quot;,&quot;mome&quot;]' -p eosio 
+</code></pre>
+<h4 id="_6">查看账户余额</h4>
+<pre><code>cleos get currency balance eosio.token eostea 
+</code></pre>
+<p>返回结果：</p>
+<pre><code>100000.0000 EOS
+</code></pre>
+<p>至此EOS测试网络的设置已经完毕，想要了解给更多BP相关的部署和设置等内容请到<a href="https://eosfans.io/wiki/eos-party-testnet">EOS中文社区wiki</a>查看。</p>
+
+<!-- Source file information -->
+
+
+<!-- Was this page helpful? -->
+
+
+
+
+<!-- Comment system -->
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../EOS%20%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E4%B9%8B-%E6%9D%83%E9%99%90%E7%9A%84%E4%BD%BF%E7%94%A8%20%28%E4%BD%A0%E7%BB%9D%E5%AF%B9%E6%89%BE%E4%B8%8D%E5%88%B0%E7%9A%84%E5%B9%B2%E8%B4%A7%29/" class="md-footer__link md-footer__link--prev" aria-label="Previous: EOS 权限管理之 权限的使用 (你绝对找不到的干货)" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              EOS 权限管理之 权限的使用 (你绝对找不到的干货)
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../EOSIO%204.0%E6%B5%8B%E8%AF%95%E7%BD%91%E7%BB%9C%E5%90%AF%E5%8A%A8%E6%95%99%E7%A8%8B/" class="md-footer__link md-footer__link--next" aria-label="Next: EOSIO 4.0测试网络启动教程" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              EOSIO 4.0测试网络启动教程
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.8492ddcf.min.js"></script>
+      
+    
+  </body>
+</html>

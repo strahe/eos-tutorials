@@ -1,0 +1,1434 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.1, mkdocs-material-8.5.7">
+    
+    
+      
+        <title>贡献一个测试基础功能的 shell 脚本 - EOS Tutorials</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.20d9efc8.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#binbash" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="EOS Tutorials" class="md-header__button md-logo" aria-label="EOS Tutorials" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            EOS Tutorials
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              贡献一个测试基础功能的 shell 脚本
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="EOS Tutorials" class="md-nav__button md-logo" aria-label="EOS Tutorials" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    EOS Tutorials
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        eos-tutorials
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Cleos
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Cleos" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Cleos
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cleos/EOS%20Dawn%203.0%20cleos%20%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/" class="md-nav__link">
+        创建缺省wallet
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cleos/cleos%20%E5%91%BD%E4%BB%A4%E5%A4%A7%E5%85%A8%E4%B9%8B%20wallet%20%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        cleos 钱包命令
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          小白入门
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="小白入门" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          小白入门
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%B0%8F%E7%99%BD%E5%85%A5%E9%97%A8/EOS%20%E5%AE%89%E8%A3%85%E6%9C%AC%E5%9C%B0%E7%8E%AF%E5%A2%83%EF%BC%8C%E5%B9%B6%E5%AE%9E%E7%8E%B0%E5%8F%91%E5%B8%81%E8%BD%AC%E8%B4%A6%E7%AD%89%E5%8A%9F%E8%83%BD/" class="md-nav__link">
+        EOS 安装本地环境，并实现发币转账等功能
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%B0%8F%E7%99%BD%E5%85%A5%E9%97%A8/%E5%9F%BA%E4%BA%8E%20linux%20%E7%9A%84%20eos%20%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84%E5%9D%91%20%281%29/" class="md-nav__link">
+        基于 linux 的 eos 开发中的坑 (1)
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          开发使用
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="开发使用" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          开发使用
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BC%80%E5%8F%91%E4%BD%BF%E7%94%A8/EOS%20%E5%B8%90%E6%88%B7%E6%9D%83%E9%99%90%E6%93%8D%E4%BD%9C%EF%BC%8D%EF%BC%8D%E4%BD%A0%E6%89%BE%E4%B8%8D%E5%88%B0%E7%9A%84%E5%B9%B2%E8%B4%A7%20%28%E5%8E%9F%E5%88%9B%29%20%E7%BB%AD%E9%9B%86-EOS%203.0/" class="md-nav__link">
+        EOS 帐户权限 3.0
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BC%80%E5%8F%91%E4%BD%BF%E7%94%A8/EOS%20%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E4%B9%8B-%E6%9D%83%E9%99%90%E7%9A%84%E4%BD%BF%E7%94%A8%20%28%E4%BD%A0%E7%BB%9D%E5%AF%B9%E6%89%BE%E4%B8%8D%E5%88%B0%E7%9A%84%E5%B9%B2%E8%B4%A7%29/" class="md-nav__link">
+        EOS 权限管理之 权限的使用 (你绝对找不到的干货)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BC%80%E5%8F%91%E4%BD%BF%E7%94%A8/EOS3.0%20%E6%B5%8B%E8%AF%95%E7%BD%91%E7%BB%9C%E7%BB%84%E5%BB%BA-EOS%20%E4%B8%AD%E6%96%87%E7%A4%BE%E5%8C%BA%E7%89%B9%E8%BE%91/" class="md-nav__link">
+        EOS3.0测试网络组建-EOS中文社区特辑
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BC%80%E5%8F%91%E4%BD%BF%E7%94%A8/EOSIO%204.0%E6%B5%8B%E8%AF%95%E7%BD%91%E7%BB%9C%E5%90%AF%E5%8A%A8%E6%95%99%E7%A8%8B/" class="md-nav__link">
+        EOSIO 4.0测试网络启动教程
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BC%80%E5%8F%91%E4%BD%BF%E7%94%A8/EOSIO%20%E8%BD%AC%E5%B8%90%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+        EOSIO 转帐详解
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BC%80%E5%8F%91%E4%BD%BF%E7%94%A8/EOSIO3.0%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/" class="md-nav__link">
+        EOSIO3.0数据库使用指南
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BC%80%E5%8F%91%E4%BD%BF%E7%94%A8/EOS%E5%AD%A6%E4%B9%A0%E9%98%B6%E6%AE%B5%E6%80%A7%E6%80%BB%E7%BB%93/" class="md-nav__link">
+        EOS学习阶段性总结
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          开发工具
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="开发工具" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          开发工具
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../EOS%20%E5%BC%80%E5%8F%91%E7%BB%88%E6%9E%81%E7%A5%9E%E5%99%A8%EF%BC%8Dvscode%20%28%E4%BD%A0%E7%BB%9D%E5%AF%B9%E6%89%BE%E4%B8%8D%E5%88%B0%E7%9A%84%E5%B9%B2%E8%B4%A7%29/" class="md-nav__link">
+        EOS开发终极神器－vscode(你绝对找不到的干货)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Qt%20Creator%20%E5%BC%80%E5%8F%91%20EOS%203.0%20%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/" class="md-nav__link">
+        下载和安装Qt Creator
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        贡献一个测试基础功能的 shell 脚本
+      </a>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6">
+          智能合约
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="智能合约" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          智能合约
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/EOS%20%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E6%A8%A1%E6%9D%BF%20%28%E4%BA%8C%29/" class="md-nav__link">
+        EOS 智能合约模板 (二)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/EOS%20%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E6%A8%A1%E6%9D%BF/" class="md-nav__link">
+        1.  支持类型说明和调用实例
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/EOS3.0-HelloWorld%E6%95%99%E7%A8%8B/" class="md-nav__link">
+        EOSIO3.0 hello world 从0到1
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/EOS3.0-%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/" class="md-nav__link">
+        EOSIO 3.0 使用指南
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/EOS3.0-%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/" class="md-nav__link">
+        EOSIO 智能合约
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/EOSIO%20%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E6%95%B0%E6%8D%AE%E5%BA%93%E6%BC%94%E7%BB%83/" class="md-nav__link">
+        EOSIO 智能合约数据库演练
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/dice%20%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E5%BA%94%E8%AF%A5%E8%BF%99%E4%B9%88%E7%8E%A9/" class="md-nav__link">
+        1. dice 玩法说明
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/%E5%BF%83%E5%BF%83%E5%BF%B5%E5%BF%B5%E7%9A%84%20Lover%20Wall%203.0%E7%89%88%E6%9C%AC%E6%9D%A5%E4%BA%86%28%E5%8E%9F%E5%88%9B%29/" class="md-nav__link">
+        心心念念的 Lover Wall 3.0版本来了(原创)
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7">
+          精品文章
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="精品文章" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          精品文章
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%B2%BE%E5%93%81%E6%96%87%E7%AB%A0/%E4%B8%80%E4%B8%AA%E9%92%88%E5%AF%B9EOSIO%E5%8C%BA%E5%9D%97%E7%94%9F%E4%BA%A7%E5%91%98%E7%9A%84DDOS%E6%94%BB%E5%87%BB%E7%9A%84%E7%BC%93%E8%A7%A3%E6%96%B9%E6%A1%88/" class="md-nav__link">
+        一个针对EOSIO区块生产员的DDOS攻击的缓解方案
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  <!--
+  Copyright (c) 2016-2022 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Tags -->
+
+
+<!-- Actions -->
+
+
+<!--
+  Hack: check whether the content contains a h1 headline. If it doesn't, the
+  page title (or respectively site name) is used as the main headline.
+-->
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3023358183033336"
+     crossorigin="anonymous"></script>
+<!-- eos-tutorials -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-3023358183033336"
+     data-ad-slot="3442397541"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<!-- Page content -->
+<p>脚本说明：其实密钥是可以在脚本中生成的。我这里直接生成，在脚本里写死了，有些地方不严谨，不成熟，凑合能用，欢迎指正，谢谢。</p>
+<p>一、单实例测试</p>
+<p>1、前置条件</p>
+<p>1.1 配置文件 config.ini</p>
+<pre><code>genesis-json = genesis.json
+block-log-dir = blocks
+enable-stale-production = true
+shared-file-dir = blockchain
+shared-file-size = 8192
+http-server-address = 127.0.0.1:8888
+p2p-listen-endpoint = 0.0.0.0:9876
+p2p-server-address = localhost:9876
+allowed-connection = any
+required-participation = 33
+private-key = [&quot;EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV&quot;,&quot;5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3&quot;]
+producer-name = eosio
+
+plugin = eosio::producer_plugin
+plugin = eosio::chain_api_plugin
+plugin = eosio::account_history_plugin
+plugin = eosio::account_history_api_plugin
+plugin = eosio::wallet_plugin
+plugin = eosio::wallet_api_plugin
+plugin = eosio::net_plugin
+plugin = eosio::net_api_plugin
+plugin = eosio::chain_plugin
+</code></pre>
+<p>1.2 目前只能一个producer工作  eosio</p>
+<p>1.3 规划4个钱包：default,wallet_1,wallet_2,wallet_3</p>
+<p>1.4 生成12对公私钥对，备用</p>
+<p>1.5  规划6个账户：    walt1acc1,walt1acc2
+                                    walt2acc1,walt2acc2
+                                    walt3acc1,walt3acc2
+2、测试步骤和命令</p>
+<p>2.1创建default 钱包</p>
+<p>2.2初始化eosio基础配置：eosio.bios</p>
+<p>2.3创建eosio自带的智能合约系统:eosio.system</p>
+<p>2.4发行EOS合约币：100000.0000 EOS  给eosio账户</p>
+<p>2.5创建currency账户：使用系统公钥对 keypair0</p>
+<p>2.6创建设置currency智能合约</p>
+<p>2.7创建currency智能合约币，最大发行量：1000000.0000 CUR</p>
+<p>2.8 发行CUR合约币：10000.0000给currency账户</p>
+<p>2.9使用创建钱包的命令创建：三个钱包 wallet_1,wallet_2,wallet_3</p>
+<p>2.10使用12对公私钥创建6个账户</p>
+<p>2.10.1把新创建的6个账户对应的私钥分别导入到三个钱包，这样钱包和账户就绑定了</p>
+<p><img alt="" src="https://eosfans-static.strahe.com/photo/2018/235bb8a9-efd4-4f5b-9335-6289d41d3918.jpg?x-oss-process=image/resize,w_1920" /></p>
+<p>2.10.2 查看钱包的列表  ./cleos wallet list</p>
+<p>2.10.3 查看钱包的keys  ./cleos wallet keys</p>
+<p>2.10.4 锁定wallet_1,查看钱包列表  wallet list,查看钱包密钥对  wallet keys</p>
+<p>2.10.5解锁wallet_1,查看钱包列表  wallet list,查看钱包密钥对  wallet keys</p>
+<p>2.11转账测试：转EOS和CUR以及读余额的测试</p>
+<p>-------手动分割线(以下是脚本部分)----------------ubuntu1604 和MACOSX都能跑通----------------------------------------------</p>
+<p>```shell</p>
+<h1 id="binbash">!/bin/bash</h1>
+<h1 id="1-define-keypais">1 Define keypais</h1>
+<h1 id="keypair0">keypair0</h1>
+<p>privatekey0=5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3
+pbulickkey0=EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV</p>
+<h1 id="keypair1">keypair1</h1>
+<p>Privatekey1=5JZ5Wwb8uQbi3A7DmMsD2zevcKCYw1pxmitij1x4xCjU8gv7ucj
+Publickey1=EOS6a5pr4DS4CksCQSHqTdKMPbAdCyrE4b7QExDwTuCxH1vbkYMqG</p>
+<h1 id="keypair2">keypair2</h1>
+<p>Privatekey2=5JKkei9CFtawsvnHt728DUQaahcjHm5nqJsNgZzna9XZKq8eA5c
+Publickey2=EOS5NiFNF4bG7T49S6f7qVXMAt4RN2WM211s77UZrwD4cz2Xu6gw9</p>
+<h1 id="keypair3">keypair3</h1>
+<p>Privatekey3=5JBDtjPbUeV2Hte6ZuFE5ny9RtuUujWEKG1u2yYPw2jmkCR7A4Y
+Publickey3=EOS59rjXxZLjRnUEdErjtCEN8fihQnMmdsWYSz7jaeruPEoSeyCHz</p>
+<h1 id="keypair4">keypair4</h1>
+<p>Privatekey4=5JQPYAtWxdzGsJkBpHyWBV18N2rzFtMjcBwxvfndS3KXe4oQu3L
+Publickey4=EOS5psRxWMGyQS4HPNY8fa4PDhgP53vD4AZ6w24Z9HUCTxXKEH7Ey</p>
+<h1 id="keypair5">keypair5</h1>
+<p>Privatekey5=5K8tbrJbsC1nK588jLBjZwDUdRtARiLWery69QybgpEK7JNGZX8
+Publickey5=EOS6HHgXNrrjRTDmM12Ym6kehMNLrao4JpqQ5JWx1unVX7SFF296V</p>
+<h1 id="keypair6">keypair6</h1>
+<p>Privatekey6=5HrmFypKi9ES1pnLYL43rJK5n3nZh7jVSVa7PqTrbHeCu5HYUr6
+Publickey6=EOS5wquAffiaMMQsXyibBGXpB7WWhZYFtwmSUGZcfkFE49pjsB28C</p>
+<h1 id="keypair7">keypair7</h1>
+<p>Privatekey7=5HpwW81Wj3zx3VwpzitsBvjT3dTNKzffrj1BBtjgbsV2DbKJqgq
+Publickey7=EOS8EFSo72zEhgYyq5eZKrStabJegGZ5koNdr3o3iS9QcEyNnKEuo</p>
+<h1 id="keypair8">keypair8</h1>
+<p>Privatekey8=5HwLFxXXF8rvbFLiQXD2rE9HTWfppYiqK6G9e3uMWv78nRWkMVw
+Publickey8=EOS5HTYTunH1vApRdoF3bVWQaMmbh2BtaNnTYYVBdvHEQpAE4PDCh</p>
+<h1 id="keypair9">keypair9</h1>
+<p>Privatekey9=5JRzVojEi46ntQeiFR2G6xFSNBMqHDgKMqxiQmzomLGWzAwQs5F
+Publickey9=EOS7o4vLAhMsT5caP2Pv8c4Yha3tSG5EMYSzVwjRiLpQRZ9LsTyKY</p>
+<h1 id="keypair10">keypair10</h1>
+<p>Privatekey10=5JAR12zZYs745RnHzXAEUik38SP73oPF2UNqyzxoJ8ySbe7Ry6C
+Publickey10=EOS5ar66dCYpQC715kZhmYf69YCq2Ht1X8AY4Zp31nfvnqZZRLmoK</p>
+<h1 id="keypair11">keypair11</h1>
+<p>Privatekey11=5J4oA7KCzx9MejkXmNgNqeSiD5DXccyYCQs4j9YuvqGcuexy5Ei
+Publickey11=EOS7sCjRdmL7c5khiLwwstU7LKPY3wGWx8XFfwviGjaobzzU2vP9q</p>
+<h1 id="keypair12">keypair12</h1>
+<p>Privatekey12=5KKERr29AtW2jgW4911PLG61ezG6DLSteCKcS8NFpfVwDtGbBwg
+Publickey12=EOS5Wd9zeYJKCSxsmwaQvpkjs8PDeHozjzkZpqTxvCPPeckfFV6YG</p>
+<p>waitnsec=1</p>
+<h1 id="21-create-default-wallet-and-save-pin">2.1 create default wallet and save pin</h1>
+<p>CMDRES=<code>./cleos wallet create</code>
+if [[ $? -eq 1 ]];then
+  echo "create wallet default failed!"
+  exit 1
+fi
+echo "create wallet default ok!"
+temppin=${CMDRES#<em>\"}
+DefaultWalletPin=${temppin%\"</em>}</p>
+<p>sleep ${waitnsec}</p>
+<h1 id="22eosioeosiobios">2.2初始化eosio基础配置：eosio.bios</h1>
+<p>./cleos set contract eosio ../../contracts/eosio.bios -p eosio
+if [[ $? -eq 1 ]];then
+  echo "bios initialize failed!"
+  exit 1
+fi
+echo "bios initialize ok!"</p>
+<p>sleep ${waitnsec}</p>
+<h1 id="23eosioeosiosystem">2.3创建eosio自带的智能合约系统:eosio.system</h1>
+<p>./cleos set contract eosio ../../contracts/eosio.system
+if [[ $? -eq 1 ]];then
+  echo "set contract eosio failed!"
+  exit 1
+fi
+echo "set contract eosio ok!"</p>
+<p>sleep ${waitnsec}</p>
+<h1 id="24eos1000000000-eos-eosio">2.4发行EOS合约币：100000.0000 EOS  给eosio账户</h1>
+<p>./cleos push action eosio issue '{"to":"eosio","quantity":"10000.0000 EOS"}' --permission eosio@active
+if [[ $? -eq 1 ]];then
+  echo "issue contract eosio EOS coin  failed!"
+  exit 1
+fi
+echo "issue contract eosio EOS coin ok!"</p>
+<p>sleep ${waitnsec}</p>
+<h1 id="25currency-keypair0">2.5创建currency账户：使用系统公钥对 keypair0</h1>
+<p>./cleos create account eosio currency $pbulickkey0 $pbulickkey0
+if [[ $? -eq 1 ]];then
+  echo "issue contract eosio EOS coin  failed!"
+  exit 1
+fi
+echo "issue contract eosio EOS coin ok!"</p>
+<p>sleep ${waitnsec}</p>
+<h1 id="26currency">2.6创建设置currency智能合约</h1>
+<p>./cleos set contract currency ../../contracts/currency</p>
+<p>sleep ${waitnsec}</p>
+<h1 id="27currency10000000000-cur">2.7创建currency智能合约币，最大发行量：1000000.0000 CUR</h1>
+<p>./cleos push action currency create '{"issuer":"currency","maximum_supply":"1000000.0000 CUR","can_freeze":0,"can_recall":0,"can_whitelist":0}' --permission currency@active</p>
+<p>sleep ${waitnsec}</p>
+<h1 id="28-cur100000000currency">2.8 发行CUR合约币：10000.0000给currency账户</h1>
+<p>./cleos push action currency issue '{"to":"currency","quantity":"10000.0000 CUR","memo":""}' --permission currency@active</p>
+<p>sleep ${waitnsec}</p>
+<h1 id="29-wallet_1wallet_2wallet_3">2.9使用创建钱包的命令创建：三个钱包 wallet_1,wallet_2,wallet_3</h1>
+<p>CMDRES=<code>./cleos wallet create -n wallet_1</code>
+if [[ $? -eq 1 ]];then
+  echo "create wallet wallet_1 failed!"
+  exit 1
+fi
+echo "create wallet wallet_1 ok!"
+temppin=${CMDRES#<em>\"}
+Wallet1Pin=${temppin%\"</em>}</p>
+<p>sleep ${waitnsec}</p>
+<p>CMDRES=<code>./cleos wallet create -n wallet_2</code>
+if [[ $? -eq 1 ]];then
+  echo "create wallet wallet_2 failed!"
+  exit 1
+fi
+echo "create wallet wallet_2 ok!"
+temppin=${CMDRES#<em>\"}
+Wallet2Pin=${temppin%\"</em>}</p>
+<p>sleep ${waitnsec}</p>
+<p>CMDRES=<code>./cleos wallet create -n wallet_3</code>
+if [[ $? -eq 1 ]];then
+  echo "create wallet wallet_3 failed!"
+  exit 1
+fi
+echo "create wallet wallet_3 ok!"
+temppin=${CMDRES#<em>\"}
+Wallet3Pin=${temppin%\"</em>}</p>
+<p>sleep ${waitnsec}</p>
+<h1 id="210126">2.10使用12对公私钥创建6个账户</h1>
+<p>./cleos create account eosio walt1acc1 ${Publickey1} ${Publickey2}</p>
+<p>./cleos create account eosio walt1acc2 ${Publickey3} ${Publickey4}</p>
+<p>./cleos create account eosio walt2acc1 ${Publickey5} ${Publickey6}</p>
+<p>./cleos create account eosio walt2acc2 ${Publickey7} ${Publickey8}</p>
+<p>./cleos create account eosio walt3acc1 ${Publickey9} ${Publickey10}</p>
+<p>./cleos create account eosio walt3acc2 ${Publickey11} ${Publickey12}</p>
+<p>sleep ${waitnsec}</p>
+<h1 id="21016">2.10.1把新创建的6个账户对应的私钥分别导入到三个钱包，这样钱包和账户就绑定了</h1>
+<h1 id="cleos-wallet-import-privatekey0">./cleos wallet import ${privatekey0}</h1>
+<p>./cleos wallet import -n wallet_1 ${Privatekey1}</p>
+<p>./cleos wallet import -n wallet_1 ${Privatekey2}</p>
+<p>./cleos wallet import -n wallet_1 ${Privatekey3}</p>
+<p>./cleos wallet import -n wallet_1 ${Privatekey4}</p>
+<p>./cleos wallet import -n wallet_2 ${Privatekey5}</p>
+<p>./cleos wallet import -n wallet_2 ${Privatekey6}</p>
+<p>./cleos wallet import -n wallet_2 ${Privatekey7}</p>
+<p>./cleos wallet import -n wallet_2 ${Privatekey8}</p>
+<p>./cleos wallet import -n wallet_3 ${Privatekey9}</p>
+<p>./cleos wallet import -n wallet_3 ${Privatekey10}</p>
+<p>./cleos wallet import -n wallet_3 ${Privatekey11}</p>
+<p>./cleos wallet import -n wallet_3 ${Privatekey12}</p>
+<p>sleep ${waitnsec}</p>
+<h1 id="2102-cleos-wallet-list">2.10.2 查看钱包的列表  ./cleos wallet list</h1>
+<p>./cleos wallet list</p>
+<p>sleep ${waitnsec}</p>
+<h1 id="2103-keys-cleos-wallet-keys">2.10.3 查看钱包的keys  ./cleos wallet keys</h1>
+<p>./cleos wallet keys</p>
+<p>sleep ${waitnsec}</p>
+<h1 id="2104-wallet_1-wallet-list-wallet-keys">2.10.4 锁定wallet_1,查看钱包列表  wallet list,查看钱包密钥对  wallet keys</h1>
+<p>./cleos wallet lock -n wallet_1
+./cleos wallet list
+./cleos wallet keys</p>
+<p>sleep ${waitnsec}</p>
+<h1 id="2105wallet_1-wallet-list-wallet-keys">2.10.5解锁wallet_1,查看钱包列表  wallet list,查看钱包密钥对  wallet keys</h1>
+<p>echo $Wallet1Pin | ./cleos wallet unlock -n wallet_1
+./cleos wallet list
+./cleos wallet keys</p>
+<p>sleep ${waitnsec}</p>
+<h1 id="211">2.11转账测试：</h1>
+<h1 id="eoscureosio-currency-walt1acc1-walt1acc2-walt2acc1-walt2acc2-walt3acc1-walt3acc2">读取各账户的EOS和CUR余额：eosio  currency   walt1acc1   walt1acc2   walt2acc1   walt2acc2  walt3acc1 walt3acc2</h1>
+<p>echo "------------------------------get all account balance first---------------------------------------------"</p>
+<p>accounts=("eosio" "currency" "walt1acc1" "walt1acc2" "walt2acc1" "walt2acc2" "walt3acc1" "walt3acc2")</p>
+<p>for account in ${accounts[@]};do
+  echo "account ${account} balance is <code>./cleos get currency balance eos ${account}</code>"
+done</p>
+<p>for account in ${accounts[@]};do
+  echo "account ${account} balance is <code>./cleos get currency balance currency ${account}</code>"
+done</p>
+<p>sleep ${waitnsec}</p>
+<p>echo "-------------------------eosio pay to other 7 accounts 100.0000-100.0006 EOS--------------------------------------"</p>
+<h1 id="eosio-pay-to-other-7-accounts-1000000-1000006-eos">eosio pay to other 7 accounts 100.0000-100.0006 EOS</h1>
+<p>amount=1000000
+accounts=("currency" "walt1acc1" "walt1acc2" "walt2acc1" "walt2acc2" "walt3acc1" "walt3acc2")
+for account in ${accounts[@]};do
+./cleos transfer eosio ${account} ${amount}
+if [[ $? -eq 1 ]];then
+  echo "EOS transfer failed!"
+  exit 1
+fi
+let "amount += 1"
+done</p>
+<p>sleep ${waitnsec}</p>
+<h1 id="eoscureosio-currency-walt1acc1-walt1acc2-walt2acc1-walt2acc2-walt3acc1-walt3acc2_1">读取各账户的EOS和CUR余额：eosio  currency   walt1acc1   walt1acc2   walt2acc1   walt2acc2  walt3acc1 walt3acc2</h1>
+<p>accounts=("eosio" "currency" "walt1acc1" "walt1acc2" "walt2acc1" "walt2acc2" "walt3acc1" "walt3acc2")</p>
+<p>for account in ${accounts[@]};do
+  echo "account ${account} balance is <code>./cleos get currency balance eos ${account}</code>"
+done</p>
+<p>for account in ${accounts[@]};do
+  echo "account ${account} balance is <code>./cleos get currency balance currency ${account}</code>"
+done</p>
+<p>sleep ${waitnsec}</p>
+<p>echo "-------------------------currency pay to other 7 accounts 110.0000 CUR--------------------------------------"</p>
+<h1 id="cleos-push-action-currency-transfer-fromcurrencytoeosioquantity200000-curmemomy-first-transfer-permission-currencyactive">./cleos push action currency transfer '{"from":"currency","to":"eosio","quantity":"20.0000 CUR","memo":"my first transfer"}' --permission currency@active</h1>
+<h1 id="currency-pay-to-other-7-accounts-1100000-cur">currency pay to other 7 accounts 110.0000 CUR</h1>
+<p>accounts=("eosio" "walt1acc1" "walt1acc2" "walt2acc1" "walt2acc2" "walt3acc1" "walt3acc2")
+amount=10000
+for account in ${accounts[@]};do
+./cleos push action currency transfer '{"from":"currency","to":"'${account}'","quantity":"110.0000 CUR","memo":""}' --permission currency@active
+if [[ $? -eq 1 ]];then
+  echo "currency transfer failed!"
+  exit 1
+fi
+done</p>
+<p>sleep ${waitnsec}</p>
+<h1 id="eoscureosio-currency-walt1acc1-walt1acc2-walt2acc1-walt2acc2-walt3acc1-walt3acc2_2">读取各账户的EOS和CUR余额：eosio  currency   walt1acc1   walt1acc2   walt2acc1   walt2acc2  walt3acc1 walt3acc2</h1>
+<p>accounts=("eosio" "currency" "walt1acc1" "walt1acc2" "walt2acc1" "walt2acc2" "walt3acc1" "walt3acc2")</p>
+<p>for account in ${accounts[@]};do
+echo "account ${account} balance is <code>./cleos get currency balance eos ${account}</code>"
+if [[ $? -eq 1 ]];then
+  echo "currency transfer failed!"
+  exit 1
+fi
+done</p>
+<p>for account in ${accounts[@]};do
+echo "account ${account} balance is <code>./cleos get currency balance currency ${account}</code>"
+if [[ $? -eq 1 ]];then
+echo "currency transfer failed!"
+exit 1
+fi
+done</p>
+<p>sleep ${waitnsec}</p>
+<p>echo "-------------------------walt1acc1 pay to other 7 accounts 1.0000-7.0000 EOS--------------------------------------"</p>
+<h1 id="walt1acc1-pay-to-other-7-accounts-10000-70000-eos">walt1acc1 pay to other 7 accounts 1.0000-7.0000 EOS</h1>
+<p>amount=10000
+accounts=("eosio" "currency" "walt1acc2" "walt2acc1" "walt2acc2" "walt3acc1" "walt3acc2")
+for account in ${accounts[@]};do
+  ./cleos transfer walt1acc1 ${account} ${amount}
+  if [[ $? -eq 1 ]];then
+    echo "eos transfer failed!"
+    exit 1
+  fi
+  let "amount += 10000"
+done</p>
+<p>sleep ${waitnsec}</p>
+<h1 id="eoscureosio-currency-walt1acc1-walt1acc2-walt2acc1-walt2acc2-walt3acc1-walt3acc2_3">读取各账户的EOS和CUR余额：eosio  currency   walt1acc1   walt1acc2   walt2acc1   walt2acc2  walt3acc1 walt3acc2</h1>
+<p>accounts=("eosio" "currency" "walt1acc1" "walt1acc2" "walt2acc1" "walt2acc2" "walt3acc1" "walt3acc2")</p>
+<p>for account in ${accounts[@]};do
+  echo "account ${account} balance is <code>./cleos get currency balance eos ${account}</code>"
+  if [[ $? -eq 1 ]];then
+    echo "get balance failed!"
+    exit 1
+  fi
+done</p>
+<p>for account in ${accounts[@]};do
+  echo "account ${account} balance is <code>./cleos get currency balance currency ${account}</code>"
+  if [[ $? -eq 1 ]];then
+    echo "get balance failed!"
+    exit 1
+  fi
+done</p>
+<p>sleep ${waitnsec}</p>
+<p>echo "-------------------------walt1acc2 pay to other 7 accounts 1.0001-1.0007 EOS--------------------------------------"</p>
+<h1 id="walt1acc2-pay-to-other-7-accounts-10001-10007-eos">walt1acc2 pay to other 7 accounts 1.0001-1.0007 EOS</h1>
+<p>amount=10001
+accounts=("eosio" "currency" "walt1acc1" "walt2acc1" "walt2acc2" "walt3acc1" "walt3acc2")
+for account in ${accounts[@]};do
+./cleos transfer walt1acc2 ${account} ${amount}
+ if [[ $? -eq 1 ]];then
+    echo "eos transfer failed!"
+    exit 1
+  fi
+let "amount += 1"
+done</p>
+<p>sleep ${waitnsec}</p>
+<h1 id="eoscureosio-currency-walt1acc1-walt1acc2-walt2acc1-walt2acc2-walt3acc1-walt3acc2_4">读取各账户的EOS和CUR余额：eosio  currency   walt1acc1   walt1acc2   walt2acc1   walt2acc2  walt3acc1 walt3acc2</h1>
+<p>accounts=("eosio" "currency" "walt1acc1" "walt1acc2" "walt2acc1" "walt2acc2" "walt3acc1" "walt3acc2")</p>
+<p>for account in ${accounts[@]};do
+  echo "account ${account} balance is <code>./cleos get currency balance eos ${account}</code>"
+done</p>
+<p>for account in ${accounts[@]};do
+  echo "account ${account} balance is <code>./cleos get currency balance currency ${account}</code>"
+done</p>
+<p>sleep ${waitnsec}</p>
+<p>echo "-------------------------walt2acc1 pay to other 7 accounts 2.0001-2.0007 EOS--------------------------------------"</p>
+<h1 id="walt2acc1-pay-to-other-7-accounts-20001-20007-eos">walt2acc1 pay to other 7 accounts 2.0001-2.0007 EOS</h1>
+<p>amount=20001
+accounts=("eosio" "currency" "walt1acc1" "walt1acc2" "walt2acc2" "walt3acc1" "walt3acc2")
+for account in ${accounts[@]};do
+./cleos transfer walt2acc1 ${account} ${amount}
+  if [[ $? -eq 1 ]];then
+    echo "eos transfer failed!"
+    exit 1
+  fi
+let "amount += 1"
+done</p>
+<p>sleep ${waitnsec}</p>
+<h1 id="eoscureosio-currency-walt1acc1-walt1acc2-walt2acc1-walt2acc2-walt3acc1-walt3acc2_5">读取各账户的EOS和CUR余额：eosio  currency   walt1acc1   walt1acc2   walt2acc1   walt2acc2  walt3acc1 walt3acc2</h1>
+<p>accounts=("eosio" "currency" "walt1acc1" "walt1acc2" "walt2acc1" "walt2acc2" "walt3acc1" "walt3acc2")</p>
+<p>for account in ${accounts[@]};do
+  echo "account ${account} balance is <code>./cleos get currency balance eos ${account}</code>"
+done</p>
+<p>for account in ${accounts[@]};do
+  echo "account ${account} balance is <code>./cleos get currency balance currency ${account}</code>"
+done</p>
+<p>sleep ${waitnsec}</p>
+<p>echo "-------------------------walt2acc2 pay to other 7 accounts 2.0011-2.0017 EOS--------------------------------------"</p>
+<h1 id="walt2acc2-pay-to-other-7-accounts-20011-20017-eos">walt2acc2 pay to other 7 accounts 2.0011-2.0017 EOS</h1>
+<p>amount=20011
+accounts=("eosio" "currency" "walt1acc1" "walt1acc2" "walt2acc1" "walt3acc1" "walt3acc2")
+for account in ${accounts[@]};do
+./cleos transfer walt2acc2 ${account} ${amount}
+if [[ $? -eq 1 ]];then
+    echo "eos transfer failed!"
+    exit 1
+fi
+let "amount += 1"
+done</p>
+<p>sleep ${waitnsec}</p>
+<h1 id="eoscureosio-currency-walt1acc1-walt1acc2-walt2acc1-walt2acc2-walt3acc1-walt3acc2_6">读取各账户的EOS和CUR余额：eosio  currency   walt1acc1   walt1acc2   walt2acc1   walt2acc2  walt3acc1 walt3acc2</h1>
+<p>accounts=("eosio" "currency" "walt1acc1" "walt1acc2" "walt2acc1" "walt2acc2" "walt3acc1" "walt3acc2")</p>
+<p>for account in ${accounts[@]};do
+  echo "account ${account} balance is <code>./cleos get currency balance eos ${account}</code>"
+done</p>
+<p>for account in ${accounts[@]};do
+  echo "account ${account} balance is <code>./cleos get currency balance currency ${account}</code>"
+done</p>
+<p>sleep ${waitnsec}</p>
+<p>echo "-------------------------walt3acc1 pay to other 7 accounts 3.0001-3.0007 EOS--------------------------------------"</p>
+<h1 id="walt3acc1-pay-to-other-7-accounts-30001-20007-eos">walt3acc1 pay to other 7 accounts 3.0001-2.0007 EOS</h1>
+<p>amount=30001
+accounts=("eosio" "currency" "walt1acc1" "walt1acc2" "walt2acc1" "walt2acc2" "walt3acc2")
+for account in ${accounts[@]};do
+./cleos transfer walt3acc1 ${account} ${amount}
+  if [[ $? -eq 1 ]];then
+    echo "eos transfer failed!"
+    exit 1
+  fi
+let "amount += 1"
+done</p>
+<p>sleep ${waitnsec}</p>
+<h1 id="eoscureosio-currency-walt1acc1-walt1acc2-walt2acc1-walt2acc2-walt3acc1-walt3acc2_7">读取各账户的EOS和CUR余额：eosio  currency   walt1acc1   walt1acc2   walt2acc1   walt2acc2  walt3acc1 walt3acc2</h1>
+<p>accounts=("eosio" "currency" "walt1acc1" "walt1acc2" "walt2acc1" "walt2acc2" "walt3acc1" "walt3acc2")</p>
+<p>for account in ${accounts[@]};do
+  echo "account ${account} balance is <code>./cleos get currency balance eos ${account}</code>"
+done</p>
+<p>for account in ${accounts[@]};do
+  echo "account ${account} balance is <code>./cleos get currency balance currency ${account}</code>"
+done</p>
+<p>sleep ${waitnsec}</p>
+<p>echo "-------------------------walt3acc2 pay to other 7 accounts 3.0011-3.0017 EOS--------------------------------------"</p>
+<h1 id="walt3acc2-pay-to-other-7-accounts-30011-30017-eos">walt3acc2 pay to other 7 accounts 3.0011-3.0017 EOS</h1>
+<p>amount=30011
+accounts=("eosio" "currency" "walt1acc1" "walt1acc2" "walt2acc1" "walt2acc2" "walt3acc1")
+for account in ${accounts[@]};do
+./cleos transfer walt3acc2 ${account} ${amount}
+  if [[ $? -eq 1 ]];then
+    echo "eos transfer failed!"
+    exit 1
+  fi
+let "amount += 1"
+done</p>
+<p>sleep ${waitnsec}</p>
+<h1 id="eoscureosio-currency-walt1acc1-walt1acc2-walt2acc1-walt2acc2-walt3acc1-walt3acc2_8">读取各账户的EOS和CUR余额：eosio  currency   walt1acc1   walt1acc2   walt2acc1   walt2acc2  walt3acc1 walt3acc2</h1>
+<p>accounts=("eosio" "currency" "walt1acc1" "walt1acc2" "walt2acc1" "walt2acc2" "walt3acc1" "walt3acc2")</p>
+<p>for account in ${accounts[@]};do
+  echo "account ${account} balance is <code>./cleos get currency balance eos ${account}</code>"
+done</p>
+<p>for account in ${accounts[@]};do
+  echo "account ${account} balance is <code>./cleos get currency balance currency ${account}</code>"
+done</p>
+<p>sleep ${waitnsec}</p>
+<p>echo "-------------------------currency pay test form accounts--------------------------------------"</p>
+<p>echo "-------------------------walt1acc1 pay to other 7 accounts 1.1111 CUR--------------------------------------"</p>
+<h1 id="walt1acc1-pay-to-other-7-accounts-11111-cur">walt1acc1 pay to other 7 accounts 1.1111 CUR</h1>
+<p>accounts=("eosio" "currency" "walt1acc2" "walt2acc1" "walt2acc2" "walt3acc1" "walt3acc2")
+for account in ${accounts[@]};do
+./cleos push action currency transfer '{"from":"walt1acc1","to":"'${account}'","quantity":"1.1111 CUR","memo":""}' --permission walt1acc1@active
+  if [[ $? -eq 1 ]];then
+    echo "currency transfer failed!"
+    exit 1
+  fi
+done</p>
+<p>sleep ${waitnsec}</p>
+<h1 id="eoscureosio-currency-walt1acc1-walt1acc2-walt2acc1-walt2acc2-walt3acc1-walt3acc2_9">读取各账户的EOS和CUR余额：eosio  currency   walt1acc1   walt1acc2   walt2acc1   walt2acc2  walt3acc1 walt3acc2</h1>
+<p>accounts=("eosio" "currency" "walt1acc1" "walt1acc2" "walt2acc1" "walt2acc2" "walt3acc1" "walt3acc2")</p>
+<p>for account in ${accounts[@]};do
+  echo "account ${account} balance is <code>./cleos get currency balance eos ${account}</code>"
+done</p>
+<p>for account in ${accounts[@]};do
+  echo "account ${account} balance is <code>./cleos get currency balance currency ${account}</code>"
+done</p>
+<p>sleep ${waitnsec}</p>
+<p>echo "-------------------------walt1acc2 pay to other 7 accounts 2.2222 CUR--------------------------------------"</p>
+<h1 id="walt1acc2-pay-to-other-7-accounts-22222-cur">walt1acc2 pay to other 7 accounts 2.2222 CUR</h1>
+<p>accounts=("eosio" "currency" "walt1acc1" "walt2acc1" "walt2acc2" "walt3acc1" "walt3acc2")
+for account in ${accounts[@]};do
+./cleos push action currency transfer '{"from":"walt1acc2","to":"'${account}'","quantity":"2.2222 CUR","memo":"currency-&gt;eosio 2.2222 CUR"}' --permission walt1acc2@active
+  if [[ $? -eq 1 ]];then
+    echo "currency transfer failed!"
+    exit 1
+  fi
+done</p>
+<p>sleep ${waitnsec}</p>
+<h1 id="eoscureosio-currency-walt1acc1-walt1acc2-walt2acc1-walt2acc2-walt3acc1-walt3acc2_10">读取各账户的EOS和CUR余额：eosio  currency   walt1acc1   walt1acc2   walt2acc1   walt2acc2  walt3acc1 walt3acc2</h1>
+<p>accounts=("eosio" "currency" "walt1acc1" "walt1acc2" "walt2acc1" "walt2acc2" "walt3acc1" "walt3acc2")</p>
+<p>for account in ${accounts[@]};do
+  echo "account ${account} balance is <code>./cleos get currency balance eos ${account}</code>"
+done</p>
+<p>for account in ${accounts[@]};do
+  echo "account ${account} balance is <code>./cleos get currency balance currency ${account}</code>"
+done</p>
+<p>sleep ${waitnsec}</p>
+<p>echo "-------------------------walt2acc1 pay to other 7 accounts 3.3333 CUR--------------------------------------"</p>
+<h1 id="walt2acc1-pay-to-other-7-accounts-33333-cur">walt2acc1 pay to other 7 accounts 3.3333 CUR</h1>
+<p>accounts=("eosio" "currency" "walt1acc1" "walt1acc2" "walt2acc2" "walt3acc1" "walt3acc2")
+for account in ${accounts[@]};do
+./cleos push action currency transfer '{"from":"walt2acc1","to":"'${account}'","quantity":"3.3333 CUR","memo":""}' --permission walt2acc1@active
+  if [[ $? -eq 1 ]];then
+    echo "currency transfer failed!"
+    exit 1
+  fi
+done</p>
+<p>sleep ${waitnsec}</p>
+<h1 id="eoscureosio-currency-walt1acc1-walt1acc2-walt2acc1-walt2acc2-walt3acc1-walt3acc2_11">读取各账户的EOS和CUR余额：eosio  currency   walt1acc1   walt1acc2   walt2acc1   walt2acc2  walt3acc1 walt3acc2</h1>
+<p>accounts=("eosio" "currency" "walt1acc1" "walt1acc2" "walt2acc1" "walt2acc2" "walt3acc1" "walt3acc2")</p>
+<p>for account in ${accounts[@]};do
+  echo "account ${account} balance is <code>./cleos get currency balance eos ${account}</code>"
+done</p>
+<p>sleep ${waitnsec}</p>
+<p>for account in ${accounts[@]};do
+  echo "account ${account} balance is <code>./cleos get currency balance currency ${account}</code>"
+done</p>
+<p>sleep ${waitnsec}</p>
+<p>echo "-------------------------walt2acc2 pay to other 7 accounts 4.4444 CUR--------------------------------------"</p>
+<h1 id="walt2acc2-pay-to-other-7-accounts-44444-cur">walt2acc2 pay to other 7 accounts 4.4444 CUR</h1>
+<p>amount=11110
+accounts=("eosio" "currency" "walt1acc1" "walt1acc2" "walt2acc1" "walt3acc1" "walt3acc2")
+for account in ${accounts[@]};do
+./cleos push action currency transfer '{"from":"walt2acc2","to":"'${account}'","quantity":"4.4444 CUR","memo":""}' --permission walt2acc2@active
+  if [[ $? -eq 1 ]];then
+    echo "currency transfer failed!"
+    exit 1
+  fi
+let "amount += 10"
+done</p>
+<p>sleep ${waitnsec}</p>
+<h1 id="eoscureosio-currency-walt1acc1-walt1acc2-walt2acc1-walt2acc2-walt3acc1-walt3acc2_12">读取各账户的EOS和CUR余额：eosio  currency   walt1acc1   walt1acc2   walt2acc1   walt2acc2  walt3acc1 walt3acc2</h1>
+<p>accounts=("eosio" "currency" "walt1acc1" "walt1acc2" "walt2acc1" "walt2acc2" "walt3acc1" "walt3acc2")</p>
+<p>for account in ${accounts[@]};do
+  echo "account ${account} balance is <code>./cleos get currency balance eos ${account}</code>"
+done</p>
+<p>sleep ${waitnsec}</p>
+<p>for account in ${accounts[@]};do
+  echo "account ${account} balance is <code>./cleos get currency balance currency ${account}</code>"
+done</p>
+<p>sleep ${waitnsec}</p>
+<p>echo "-------------------------walt3acc1 pay to other 7 accounts 5.5555 CUR--------------------------------------"</p>
+<h1 id="walt3acc1-pay-to-other-7-accounts-55555-cur">walt3acc1 pay to other 7 accounts 5.5555 CUR</h1>
+<p>accounts=("eosio" "currency" "walt1acc1" "walt1acc2" "walt2acc1" "walt2acc2" "walt3acc2")
+for account in ${accounts[@]};do
+./cleos push action currency transfer '{"from":"walt3acc1","to":"'${account}'","quantity":"5.5555 CUR","memo":""}' --permission walt3acc1@active
+  if [[ $? -eq 1 ]];then
+    echo "currency transfer failed!"
+    exit 1
+  fi
+done</p>
+<p>sleep ${waitnsec}</p>
+<h1 id="eoscureosio-currency-walt1acc1-walt1acc2-walt2acc1-walt2acc2-walt3acc1-walt3acc2_13">读取各账户的EOS和CUR余额：eosio  currency   walt1acc1   walt1acc2   walt2acc1   walt2acc2  walt3acc1 walt3acc2</h1>
+<p>accounts=("eosio" "currency" "walt1acc1" "walt1acc2" "walt2acc1" "walt2acc2" "walt3acc1" "walt3acc2")</p>
+<p>for account in ${accounts[@]};do
+  echo "account ${account} balance is <code>./cleos get currency balance eos ${account}</code>"
+done</p>
+<p>for account in ${accounts[@]};do
+  echo "account ${account} balance is <code>./cleos get currency balance currency ${account}</code>"
+done</p>
+<p>sleep ${waitnsec}</p>
+<p>echo "-------------------------walt3acc2 pay to other 7 accounts 6.6666 CUR--------------------------------------"</p>
+<h1 id="walt3acc2-pay-to-other-7-accounts-66666-cur">walt3acc2 pay to other 7 accounts 6.6666 CUR</h1>
+<p>accounts=("eosio" "currency" "walt1acc1" "walt1acc2" "walt2acc1" "walt2acc2" "walt3acc1")
+for account in ${accounts[@]};do
+./cleos push action currency transfer '{"from":"walt3acc2","to":"'${account}'","quantity":"6.6666 CUR","memo":""}' --permission walt3acc2@active
+  if [[ $? -eq 1 ]];then
+    echo "currency transfer failed!"
+    exit 1
+  fi
+done</p>
+<p>sleep ${waitnsec}</p>
+<h1 id="eoscureosio-currency-walt1acc1-walt1acc2-walt2acc1-walt2acc2-walt3acc1-walt3acc2_14">读取各账户的EOS和CUR余额：eosio  currency   walt1acc1   walt1acc2   walt2acc1   walt2acc2  walt3acc1 walt3acc2</h1>
+<p>accounts=("eosio" "currency" "walt1acc1" "walt1acc2" "walt2acc1" "walt2acc2" "walt3acc1" "walt3acc2")</p>
+<p>for account in ${accounts[@]};do
+  echo "account ${account} balance is <code>./cleos get currency balance eos ${account}</code>"
+done</p>
+<p>sleep ${waitnsec}</p>
+<p>for account in ${accounts[@]};do
+  echo "account ${account} balance is <code>./cleos get currency balance currency ${account}</code>"
+done```</p>
+
+<!-- Source file information -->
+
+
+<!-- Was this page helpful? -->
+
+
+
+
+<!-- Comment system -->
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../Qt%20Creator%20%E5%BC%80%E5%8F%91%20EOS%203.0%20%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 下载和安装Qt Creator" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              下载和安装Qt Creator
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../../%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/EOS%20%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E6%A8%A1%E6%9D%BF%20%28%E4%BA%8C%29/" class="md-footer__link md-footer__link--next" aria-label="Next: EOS 智能合约模板 (二)" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              EOS 智能合约模板 (二)
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.8492ddcf.min.js"></script>
+      
+    
+  </body>
+</html>

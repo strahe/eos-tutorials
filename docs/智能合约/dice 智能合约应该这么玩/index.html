@@ -1,0 +1,1126 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.1, mkdocs-material-8.5.7">
+    
+    
+      
+        <title>1. dice 玩法说明 - EOS Tutorials</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.20d9efc8.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1-dice" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="EOS Tutorials" class="md-header__button md-logo" aria-label="EOS Tutorials" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            EOS Tutorials
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              1. dice 玩法说明
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="EOS Tutorials" class="md-nav__button md-logo" aria-label="EOS Tutorials" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    EOS Tutorials
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        eos-tutorials
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Cleos
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Cleos" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Cleos
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cleos/EOS%20Dawn%203.0%20cleos%20%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/" class="md-nav__link">
+        创建缺省wallet
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cleos/cleos%20%E5%91%BD%E4%BB%A4%E5%A4%A7%E5%85%A8%E4%B9%8B%20wallet%20%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        cleos 钱包命令
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          小白入门
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="小白入门" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          小白入门
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%B0%8F%E7%99%BD%E5%85%A5%E9%97%A8/EOS%20%E5%AE%89%E8%A3%85%E6%9C%AC%E5%9C%B0%E7%8E%AF%E5%A2%83%EF%BC%8C%E5%B9%B6%E5%AE%9E%E7%8E%B0%E5%8F%91%E5%B8%81%E8%BD%AC%E8%B4%A6%E7%AD%89%E5%8A%9F%E8%83%BD/" class="md-nav__link">
+        EOS 安装本地环境，并实现发币转账等功能
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%B0%8F%E7%99%BD%E5%85%A5%E9%97%A8/%E5%9F%BA%E4%BA%8E%20linux%20%E7%9A%84%20eos%20%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84%E5%9D%91%20%281%29/" class="md-nav__link">
+        基于 linux 的 eos 开发中的坑 (1)
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          开发使用
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="开发使用" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          开发使用
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BC%80%E5%8F%91%E4%BD%BF%E7%94%A8/EOS%20%E5%B8%90%E6%88%B7%E6%9D%83%E9%99%90%E6%93%8D%E4%BD%9C%EF%BC%8D%EF%BC%8D%E4%BD%A0%E6%89%BE%E4%B8%8D%E5%88%B0%E7%9A%84%E5%B9%B2%E8%B4%A7%20%28%E5%8E%9F%E5%88%9B%29%20%E7%BB%AD%E9%9B%86-EOS%203.0/" class="md-nav__link">
+        EOS 帐户权限 3.0
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BC%80%E5%8F%91%E4%BD%BF%E7%94%A8/EOS%20%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E4%B9%8B-%E6%9D%83%E9%99%90%E7%9A%84%E4%BD%BF%E7%94%A8%20%28%E4%BD%A0%E7%BB%9D%E5%AF%B9%E6%89%BE%E4%B8%8D%E5%88%B0%E7%9A%84%E5%B9%B2%E8%B4%A7%29/" class="md-nav__link">
+        EOS 权限管理之 权限的使用 (你绝对找不到的干货)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BC%80%E5%8F%91%E4%BD%BF%E7%94%A8/EOS3.0%20%E6%B5%8B%E8%AF%95%E7%BD%91%E7%BB%9C%E7%BB%84%E5%BB%BA-EOS%20%E4%B8%AD%E6%96%87%E7%A4%BE%E5%8C%BA%E7%89%B9%E8%BE%91/" class="md-nav__link">
+        EOS3.0测试网络组建-EOS中文社区特辑
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BC%80%E5%8F%91%E4%BD%BF%E7%94%A8/EOSIO%204.0%E6%B5%8B%E8%AF%95%E7%BD%91%E7%BB%9C%E5%90%AF%E5%8A%A8%E6%95%99%E7%A8%8B/" class="md-nav__link">
+        EOSIO 4.0测试网络启动教程
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BC%80%E5%8F%91%E4%BD%BF%E7%94%A8/EOSIO%20%E8%BD%AC%E5%B8%90%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+        EOSIO 转帐详解
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BC%80%E5%8F%91%E4%BD%BF%E7%94%A8/EOSIO3.0%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/" class="md-nav__link">
+        EOSIO3.0数据库使用指南
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BC%80%E5%8F%91%E4%BD%BF%E7%94%A8/EOS%E5%AD%A6%E4%B9%A0%E9%98%B6%E6%AE%B5%E6%80%A7%E6%80%BB%E7%BB%93/" class="md-nav__link">
+        EOS学习阶段性总结
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          开发工具
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="开发工具" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          开发工具
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/EOS%20%E5%BC%80%E5%8F%91%E7%BB%88%E6%9E%81%E7%A5%9E%E5%99%A8%EF%BC%8Dvscode%20%28%E4%BD%A0%E7%BB%9D%E5%AF%B9%E6%89%BE%E4%B8%8D%E5%88%B0%E7%9A%84%E5%B9%B2%E8%B4%A7%29/" class="md-nav__link">
+        EOS开发终极神器－vscode(你绝对找不到的干货)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/Qt%20Creator%20%E5%BC%80%E5%8F%91%20EOS%203.0%20%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/" class="md-nav__link">
+        下载和安装Qt Creator
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/%E8%B4%A1%E7%8C%AE%E4%B8%80%E4%B8%AA%E6%B5%8B%E8%AF%95%E5%9F%BA%E7%A1%80%E5%8A%9F%E8%83%BD%E7%9A%84%20shell%20%E8%84%9A%E6%9C%AC/" class="md-nav__link">
+        贡献一个测试基础功能的 shell 脚本
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6">
+          智能合约
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="智能合约" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          智能合约
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../EOS%20%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E6%A8%A1%E6%9D%BF%20%28%E4%BA%8C%29/" class="md-nav__link">
+        EOS 智能合约模板 (二)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../EOS%20%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E6%A8%A1%E6%9D%BF/" class="md-nav__link">
+        1.  支持类型说明和调用实例
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../EOS3.0-HelloWorld%E6%95%99%E7%A8%8B/" class="md-nav__link">
+        EOSIO3.0 hello world 从0到1
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../EOS3.0-%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/" class="md-nav__link">
+        EOSIO 3.0 使用指南
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../EOS3.0-%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/" class="md-nav__link">
+        EOSIO 智能合约
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../EOSIO%20%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E6%95%B0%E6%8D%AE%E5%BA%93%E6%BC%94%E7%BB%83/" class="md-nav__link">
+        EOSIO 智能合约数据库演练
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        1. dice 玩法说明
+      </a>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%BF%83%E5%BF%83%E5%BF%B5%E5%BF%B5%E7%9A%84%20Lover%20Wall%203.0%E7%89%88%E6%9C%AC%E6%9D%A5%E4%BA%86%28%E5%8E%9F%E5%88%9B%29/" class="md-nav__link">
+        心心念念的 Lover Wall 3.0版本来了(原创)
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7">
+          精品文章
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="精品文章" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          精品文章
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%B2%BE%E5%93%81%E6%96%87%E7%AB%A0/%E4%B8%80%E4%B8%AA%E9%92%88%E5%AF%B9EOSIO%E5%8C%BA%E5%9D%97%E7%94%9F%E4%BA%A7%E5%91%98%E7%9A%84DDOS%E6%94%BB%E5%87%BB%E7%9A%84%E7%BC%93%E8%A7%A3%E6%96%B9%E6%A1%88/" class="md-nav__link">
+        一个针对EOSIO区块生产员的DDOS攻击的缓解方案
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  <!--
+  Copyright (c) 2016-2022 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Tags -->
+
+
+<!-- Actions -->
+
+
+<!--
+  Hack: check whether the content contains a h1 headline. If it doesn't, the
+  page title (or respectively site name) is used as the main headline.
+-->
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3023358183033336"
+     crossorigin="anonymous"></script>
+<!-- eos-tutorials -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-3023358183033336"
+     data-ad-slot="3442397541"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<!-- Page content -->
+<h1 id="1-dice">1. dice 玩法说明</h1>
+<p>两个人玩的猜数游戏，两个出一样额度的赌注，然后A写下一个数，B如果在一定时间内猜对，则赢得赌注。（理解可能有误，请懂的大佬指出错误）</p>
+<h1 id="2">2. 操作大致流程</h1>
+<p>概要：创建钱包，发行货币，创建两个玩家，上传押金，上传同样赌注，开始游戏，结束游戏，拿走货币。</p>
+<p>首先启动nodes</p>
+<pre><code class="language-python">nodeos -e -p eosio --plugin eosio::wallet_api_plugin --plugin eosio::chain_api_plugin --plugin eosio::account_history_api_plugin
+</code></pre>
+<p>然后创建钱包，然后导入eosio（默认导入）和dice 私钥</p>
+<pre><code class="language-python">cleos wallet create
+Creating wallet: default
+Save password to use in the future to unlock this wallet.
+Without password imported keys will not be retrievable.
+&quot;PW5HpvzFiU7kLx6FXcq5RjEyU33mWLEFJuZQPz4znBFDwb6DFFac6&quot;
+
+cleos wallet import 5Jmsawgsp1tQ3GD6JyGCwy1dcvqKZgX6ugMVMdjirx85iv5VyPR
+imported private key for: EOS7ijWCBmoXBi3CgtK7DJxentZZeTkeUnaSDvyro9dq7Sd1C3dC4
+</code></pre>
+<p>上传bios合约，用于创建eosio.token账号，为eosio发行货币</p>
+<pre><code class="language-python">cleos set contract eosio build/contracts/eosio.bios -p eosio
+Reading WAST/WASM from build/contracts/eosio.bios/eosio.bios.wast...
+Assembling WASM...
+Publishing contract...
+executed transaction: 88355c1ebc31960b521b992f9410f95a5a0921c790f424356453cf5f84edb077 3288 bytes 2200576 cycles
+# eosio &lt;= eosio::setcode {&quot;account&quot;:&quot;eosio&quot;,&quot;vmtype&quot;:0,&quot;vmversion&quot;:0,&quot;code&quot;:&quot;0061736d0100000001581060037f7e7f0060057f7e7e7e7e...
+# eosio &lt;= eosio::setabi {&quot;account&quot;:&quot;eosio&quot;,&quot;abi&quot;:{&quot;types&quot;:[],&quot;structs&quot;:[{&quot;name&quot;:&quot;set_account_limits&quot;,&quot;base&quot;:&quot;&quot;,&quot;fields&quot;:[{&quot;n...
+</code></pre>
+<p>创建eosio.token账号</p>
+<pre><code class="language-python">cleos create account eosio eosio.token EOS7ijWCBmoXBi3CgtK7DJxentZZeTkeUnaSDvyro9dq7Sd1C3dC4 EOS7ijWCBmoXBi3CgtK7DJxentZZeTkeUnaSDvyro9dq7Sd1C3dC4
+executed transaction: 46c68f270dfceb36ce2270a6bad89ca2228b9750a19a3a3bc92578a46637fbb1 352 bytes 102400 cycles
+# eosio &lt;= eosio::newaccount {&quot;creator&quot;:&quot;eosio&quot;,&quot;name&quot;:&quot;eosio.token&quot;,&quot;owner&quot;:{&quot;threshold&quot;:1,&quot;keys&quot;:[{&quot;key&quot;:&quot;EOS7ijWCBmoXBi3CgtK7D...
+</code></pre>
+<p>为eosio.token账号部署eosio.token合约</p>
+<pre><code class="language-python">cleos set contract eosio.token build/contracts/eosio.token -p eosio.token
+Reading WAST/WASM from build/contracts/eosio.token/eosio.token.wast...
+Assembling WASM...
+Publishing contract...
+executed transaction: 5a0305bcab99b9d9f8590f51ce4d55bb0a0e60c2d79f4d61cd1ab210571171e2 8288 bytes 2200576 cycles
+# eosio &lt;= eosio::setcode {&quot;account&quot;:&quot;eosio.token&quot;,&quot;vmtype&quot;:0,&quot;vmversion&quot;:0,&quot;code&quot;:&quot;0061736d010000000183011560067f7e7f7f7f7f00...
+# eosio &lt;= eosio::setabi {&quot;account&quot;:&quot;eosio.token&quot;,&quot;abi&quot;:{&quot;types&quot;:[],&quot;structs&quot;:[{&quot;name&quot;:&quot;transfer&quot;,&quot;base&quot;:&quot;&quot;,&quot;fields&quot;:[{&quot;name&quot;...
+</code></pre>
+<p>创建dice账号，用来掌管玩家的赌注</p>
+<pre><code class="language-python">cleos create account eosio dice EOS7ijWCBmoXBi3CgtK7DJxentZZeTkeUnaSDvyro9dq7Sd1C3dC4 EOS7ijWCBmoXBi3CgtK7DJxentZZeTkeUnaSDvyro9dq7Sd1C3dC4
+executed transaction: 7d144219ebc5e2098af0b621221ea7d56572037a6adef53b5dd5691999818d18 352 bytes 102400 cycles
+# eosio &lt;= eosio::newaccount {&quot;creator&quot;:&quot;eosio&quot;,&quot;name&quot;:&quot;dice&quot;,&quot;owner&quot;:{&quot;threshold&quot;:1,&quot;keys&quot;:[{&quot;key&quot;:&quot;EOS7ijWCBmoXBi3CgtK7DJxentZZ...
+</code></pre>
+<p>部署dice合约</p>
+<pre><code class="language-python">cleos set contract dice build/contracts/dice -p dice
+Reading WAST/WASM from build/contracts/dice/dice.wast...
+Assembling WASM...
+Publishing contract...
+executed transaction: c810aa75fe5f00520c16fb7464919756cf8bc7a1f424061a0de2a41dc6c3b6e1 11744 bytes 2200576 cycles
+# eosio &lt;= eosio::setcode {&quot;account&quot;:&quot;dice&quot;,&quot;vmtype&quot;:0,&quot;vmversion&quot;:0,&quot;code&quot;:&quot;0061736d0100000001ad011a60047f7f7e7f0060027f7f006...
+# eosio &lt;= eosio::setabi {&quot;account&quot;:&quot;dice&quot;,&quot;abi&quot;:{&quot;types&quot;:[],&quot;structs&quot;:[{&quot;name&quot;:&quot;offer&quot;,&quot;base&quot;:&quot;&quot;,&quot;fields&quot;:[{&quot;name&quot;:&quot;id&quot;,&quot;typ...
+</code></pre>
+<p>为eosio创建货币，dice只支持EOS</p>
+<pre><code class="language-python">cleos push action eosio.token create '[ &quot;eosio&quot;, &quot;1000000000.0000 EOS&quot;, 0, 0, 0]' -p eosio.token
+executed transaction: b6ffc0fbb62ff4c23b7d24b8b55a34bf0c74e7c710b18d16af326b939ae9ecfd 248 bytes 104448 cycles
+# eosio.token &lt;= eosio.token::create {&quot;issuer&quot;:&quot;eosio&quot;,&quot;maximum_supply&quot;:&quot;1000000000.0000 EOS&quot;,&quot;can_freeze&quot;:0,&quot;can_recall&quot;:0,&quot;can_whitelis...
+</code></pre>
+<p>创建玩家alice和bob</p>
+<pre><code class="language-python">leos create account eosio alice EOS7ijWCBmoXBi3CgtK7DJxentZZeTkeUnaSDvyro9dq7Sd1C3dC4 EOS7ijWCBmoXBi3CgtK7DJxentZZeTkeUnaSDvyro9dq7Sd1C3dC4
+executed transaction: 5e4b7f4a687db33afa025ab7a5ea86c0e13cab68455b109c5346b02c1c62652f 352 bytes 102400 cycles
+# eosio &lt;= eosio::newaccount {&quot;creator&quot;:&quot;eosio&quot;,&quot;name&quot;:&quot;alice&quot;,&quot;owner&quot;:{&quot;threshold&quot;:1,&quot;keys&quot;:[{&quot;key&quot;:&quot;EOS7ijWCBmoXBi3CgtK7DJxentZ...
+
+cleos create account eosio bob EOS7ijWCBmoXBi3CgtK7DJxentZZeTkeUnaSDvyro9dq7Sd1C3dC4 EOS7ijWCBmoXBi3CgtK7DJxentZZeTkeUnaSDvyro9dq7Sd1C3dC4
+executed transaction: 141d6eabefc7e9fa84261559970e54d9674d5278a89a507bce3228dae7169be2 352 bytes 102400 cycles
+# eosio &lt;= eosio::newaccount {&quot;creator&quot;:&quot;eosio&quot;,&quot;name&quot;:&quot;bob&quot;,&quot;owner&quot;:{&quot;threshold&quot;:1,&quot;keys&quot;:[{&quot;key&quot;:&quot;EOS7ijWCBmoXBi3CgtK7DJxentZZe...
+</code></pre>
+<p>为alice和bob发行1000 EOS</p>
+<pre><code class="language-python">cleos push action eosio.token issue '[ &quot;alice&quot;, &quot;1000.0000 EOS&quot;, &quot;&quot; ]' -p eosio
+executed transaction: 8e33d754aa7dd8987522c3c76ab9a1bffada096363f71169e6da71d444552631 248 bytes 124928 cycles
+# eosio.token &lt;= eosio.token::issue {&quot;to&quot;:&quot;alice&quot;,&quot;quantity&quot;:&quot;1000.0000 EOS&quot;,&quot;memo&quot;:&quot;&quot;}
+&gt;&gt; issue
+# eosio.token &lt;= eosio.token::transfer {&quot;from&quot;:&quot;eosio&quot;,&quot;to&quot;:&quot;alice&quot;,&quot;quantity&quot;:&quot;1000.0000 EOS&quot;,&quot;memo&quot;:&quot;&quot;}
+&gt;&gt; transfer
+# eosio &lt;= eosio.token::transfer {&quot;from&quot;:&quot;eosio&quot;,&quot;to&quot;:&quot;alice&quot;,&quot;quantity&quot;:&quot;1000.0000 EOS&quot;,&quot;memo&quot;:&quot;&quot;}
+# alice &lt;= eosio.token::transfer {&quot;from&quot;:&quot;eosio&quot;,&quot;to&quot;:&quot;alice&quot;,&quot;quantity&quot;:&quot;1000.0000 EOS&quot;,&quot;memo&quot;:&quot;&quot;}
+
+cleos push action eosio.token issue '[ &quot;bob&quot;, &quot;1000.0000 EOS&quot;, &quot;&quot; ]' -p eosio
+executed transaction: 6cac95b553404bc98cd7cd88088c4a9368b8ab1be3cd7dde0a337cb3c775a919 248 bytes 124928 cycles
+# eosio.token &lt;= eosio.token::issue {&quot;to&quot;:&quot;bob&quot;,&quot;quantity&quot;:&quot;1000.0000 EOS&quot;,&quot;memo&quot;:&quot;&quot;}
+&gt;&gt; issue
+# eosio.token &lt;= eosio.token::transfer {&quot;from&quot;:&quot;eosio&quot;,&quot;to&quot;:&quot;bob&quot;,&quot;quantity&quot;:&quot;1000.0000 EOS&quot;,&quot;memo&quot;:&quot;&quot;}
+&gt;&gt; transfer
+# eosio &lt;= eosio.token::transfer {&quot;from&quot;:&quot;eosio&quot;,&quot;to&quot;:&quot;bob&quot;,&quot;quantity&quot;:&quot;1000.0000 EOS&quot;,&quot;memo&quot;:&quot;&quot;}
+# bob &lt;= eosio.token::transfer {&quot;from&quot;:&quot;eosio&quot;,&quot;to&quot;:&quot;bob&quot;,&quot;quantity&quot;:&quot;1000.0000 EOS&quot;,&quot;memo&quot;:&quot;&quot;}
+</code></pre>
+<p>激活alice和bob转账权限</p>
+<pre><code class="language-python">cleos set account permission alice active '{&quot;threshold&quot;: 1,&quot;keys&quot;: [{&quot;key&quot;: &quot;EOS7ijWCBmoXBi3CgtK7DJxentZZeTkeUnaSDvyro9dq7Sd1C3dC4&quot;,&quot;weight&quot;: 1}],&quot;accounts&quot;: [{&quot;permission&quot;:{&quot;actor&quot;:&quot;dice&quot;,&quot;permission&quot;:&quot;active&quot;},&quot;weight&quot;:1}]}' owner -p alice
+executed transaction: 49275f38369b6966293a9dcd2dd2c76818d6513fbf4f5590ede50840db9337b4 312 bytes 102400 cycles
+# eosio &lt;= eosio::updateauth {&quot;account&quot;:&quot;alice&quot;,&quot;permission&quot;:&quot;active&quot;,&quot;parent&quot;:&quot;owner&quot;,&quot;data&quot;:{&quot;threshold&quot;:1,&quot;keys&quot;:[{&quot;key&quot;:&quot;EOS7...
+
+cleos set account permission bob active '{&quot;threshold&quot;: 1,&quot;keys&quot;: [{&quot;key&quot;: &quot;EOS7ijWCBmoXBi3CgtK7DJxentZZeTkeUnaSDvyro9dq7Sd1C3dC4&quot;,&quot;weight&quot;: 1}],&quot;accounts&quot;: [{&quot;permission&quot;:{&quot;actor&quot;:&quot;dice&quot;,&quot;permission&quot;:&quot;active&quot;},&quot;weight&quot;:1}]}' owner -p bob
+executed transaction: 78aee9021742cb71e3d0dd0683a10037c4001f1381334ed401ff4d060bb29b2e 312 bytes 102400 cycles
+# eosio &lt;= eosio::updateauth {&quot;account&quot;:&quot;bob&quot;,&quot;permission&quot;:&quot;active&quot;,&quot;parent&quot;:&quot;owner&quot;,&quot;data&quot;:{&quot;threshold&quot;:1,&quot;keys&quot;:[{&quot;key&quot;:&quot;EOS7ij...
+</code></pre>
+<p>进行游戏前，两人要上交100EOS押金（有点小贵哦）</p>
+<pre><code class="language-python">cleos push action dice deposit '[ &quot;alice&quot;, &quot;100.0000 EOS&quot; ]' -p alice
+executed transaction: 235e78118f80b11eb295815ebc2558019c1ac633f7c1c22dc8a0afd9e1a4babb 248 bytes 123904 cycles
+# dice &lt;= dice::deposit {&quot;from&quot;:&quot;alice&quot;,&quot;a&quot;:&quot;100.0000 EOS&quot;}
+# eosio.token &lt;= eosio.token::transfer {&quot;from&quot;:&quot;alice&quot;,&quot;to&quot;:&quot;dice&quot;,&quot;quantity&quot;:&quot;100.0000 EOS&quot;,&quot;memo&quot;:&quot;&quot;}
+&gt;&gt; transfer
+# alice &lt;= eosio.token::transfer {&quot;from&quot;:&quot;alice&quot;,&quot;to&quot;:&quot;dice&quot;,&quot;quantity&quot;:&quot;100.0000 EOS&quot;,&quot;memo&quot;:&quot;&quot;}
+# dice &lt;= eosio.token::transfer {&quot;from&quot;:&quot;alice&quot;,&quot;to&quot;:&quot;dice&quot;,&quot;quantity&quot;:&quot;100.0000 EOS&quot;,&quot;memo&quot;:&quot;&quot;}
+
+cleos push action dice deposit '[ &quot;bob&quot;, &quot;100.0000 EOS&quot; ]' -p bob
+executed transaction: d309b2090d2a5e73d97f0d198b2967b20dcfa9ced2d80cc75e445e10b0f43c6f 248 bytes 122880 cycles
+# dice &lt;= dice::deposit {&quot;from&quot;:&quot;bob&quot;,&quot;a&quot;:&quot;100.0000 EOS&quot;}
+# eosio.token &lt;= eosio.token::transfer {&quot;from&quot;:&quot;bob&quot;,&quot;to&quot;:&quot;dice&quot;,&quot;quantity&quot;:&quot;100.0000 EOS&quot;,&quot;memo&quot;:&quot;&quot;}
+&gt;&gt; transfer
+# bob &lt;= eosio.token::transfer {&quot;from&quot;:&quot;bob&quot;,&quot;to&quot;:&quot;dice&quot;,&quot;quantity&quot;:&quot;100.0000 EOS&quot;,&quot;memo&quot;:&quot;&quot;}
+# dice &lt;= eosio.token::transfer {&quot;from&quot;:&quot;bob&quot;,&quot;to&quot;:&quot;dice&quot;,&quot;quantity&quot;:&quot;100.0000 EOS&quot;,&quot;memo&quot;:&quot;&quot;}
+</code></pre>
+<p>alice 随机生成一个32长度的串，hex显示，在通过sha256加密后，生成一个加密串，然后将赌注和加密串同时上传到dice监管</p>
+<pre><code class="language-python">openssl rand 32 -hex
+15fe76d25e124b08feb835f12e00a879bd15666a33786e64b655891fba7d6c12
+
+echo -n '15fe76d25e124b08feb835f12e00a879bd15666a33786e64b655891fba7d6c12' | xxd -r -p | sha256sum -b | awk '{print $1}'
+50ed53fcdaf27f88d51ea4e835b1055efe779bb87e6cfdff47d28c88ffb27129
+cleos push action dice offerbet '[ &quot;3.0000 EOS&quot;, &quot;alice&quot;, &quot;d533f24d6f28ddcef3f066474f7b8355383e485681ba8e793e037f5cf36e4883&quot; ]' -p alice
+executed transaction: 2acc94e4d1fb6937fc5686740855230f3ad45f15d2406cf76daa55a57fe2a1af 280 bytes 106496 cycles
+# dice &lt;= dice::offerbet {&quot;bet&quot;:&quot;3.0000 EOS&quot;,&quot;player&quot;:&quot;alice&quot;,&quot;commitment&quot;:&quot;d533f24d6f28ddcef3f066474f7b8355383e485681ba8e793...
+</code></pre>
+<p>然后让bob干同样的事情，然后游戏已经开始了</p>
+<pre><code class="language-python">
+openssl rand 32 -hex
+15fe76d25e124b08feb835f12e00a879bd15666a33786e64b655891fba7d6c12
+
+echo -n '15fe76d25e124b08feb835f12e00a879bd15666a33786e64b655891fba7d6c12' | xxd -r -p | sha256sum -b | awk '{print $1}'
+50ed53fcdaf27f88d51ea4e835b1055efe779bb87e6cfdff47d28c88ffb27129
+
+cleos push action dice offerbet '[ &quot;3.0000 EOS&quot;, &quot;bob&quot;, &quot;50ed53fcdaf27f88d51ea4e835b1055efe779bb87e6cfdff47d28c88ffb27129&quot; ]' -p bob
+executed transaction: bcb28be69afd0eab7d125fb4fae79019f55bb18046fb4e6ee7e7982a8aed4309 280 bytes 112640 cycles
+# dice &lt;= dice::offerbet {&quot;bet&quot;:&quot;3.0000 EOS&quot;,&quot;player&quot;:&quot;bob&quot;,&quot;commitment&quot;:&quot;50ed53fcdaf27f88d51ea4e835b1055efe779bb87e6cfdff47d...
+</code></pre>
+<p>检查一下EOS是不是真确操作了，alice和bob，dice</p>
+<pre><code class="language-python">cleos get table dice dice account
+{
+&quot;rows&quot;: [{
+&quot;owner&quot;: &quot;alice&quot;,
+&quot;eos_balance&quot;: &quot;97.0000 EOS&quot;,
+&quot;open_offers&quot;: 0,
+&quot;open_games&quot;: 1
+},{
+&quot;owner&quot;: &quot;bob&quot;,
+&quot;eos_balance&quot;: &quot;97.0000 EOS&quot;,
+&quot;open_offers&quot;: 0,
+&quot;open_games&quot;: 1
+}
+],
+&quot;more&quot;: false
+}
+
+cleos get table dice dice game
+{
+&quot;rows&quot;: [{
+&quot;id&quot;: 1,
+&quot;bet&quot;: &quot;3.0000 EOS&quot;,
+&quot;deadline&quot;: &quot;1970-01-01T00:00:00&quot;,
+&quot;player1&quot;: {
+&quot;commitment&quot;: &quot;d533f24d6f28ddcef3f066474f7b8355383e485681ba8e793e037f5cf36e4883&quot;,
+&quot;reveal&quot;: &quot;0000000000000000000000000000000000000000000000000000000000000000&quot;
+},
+&quot;player2&quot;: {
+&quot;commitment&quot;: &quot;50ed53fcdaf27f88d51ea4e835b1055efe779bb87e6cfdff47d28c88ffb27129&quot;,
+&quot;reveal&quot;: &quot;0000000000000000000000000000000000000000000000000000000000000000&quot;
+}
+}
+],
+&quot;more&quot;: false
+}
+</code></pre>
+<p>bob揭示他的字符串</p>
+<pre><code class="language-python">cleos push action dice reveal '[ &quot;50ed53fcdaf27f88d51ea4e835b1055efe779bb87e6cfdff47d28c88ffb27129&quot;, &quot;15fe76d25e124b08feb835f12e00a879bd15666a33786e64b655891fba7d6c12&quot; ]' -p bob
+executed transaction: 8bd988a929970e4f110d4c9500dc13c81110eff4a8a02743bcf433f5bd8709e1 288 bytes 105472 cycles
+# dice &lt;= dice::reveal {&quot;commitment&quot;:&quot;50ed53fcdaf27f88d51ea4e835b1055efe779bb87e6cfdff47d28c88ffb27129&quot;,&quot;source&quot;:&quot;15fe76d25...
+</code></pre>
+<p>再来看一下dice</p>
+<pre><code class="language-python">cleos get table dice dice game
+{
+&quot;rows&quot;: [{
+&quot;id&quot;: 1,
+&quot;bet&quot;: &quot;3.0000 EOS&quot;,
+&quot;deadline&quot;: &quot;2018-04-19T07:58:56&quot;,
+&quot;player1&quot;: {
+&quot;commitment&quot;: &quot;d533f24d6f28ddcef3f066474f7b8355383e485681ba8e793e037f5cf36e4883&quot;,
+&quot;reveal&quot;: &quot;0000000000000000000000000000000000000000000000000000000000000000&quot;
+},
+&quot;player2&quot;: {
+&quot;commitment&quot;: &quot;50ed53fcdaf27f88d51ea4e835b1055efe779bb87e6cfdff47d28c88ffb27129&quot;,
+&quot;reveal&quot;: &quot;15fe76d25e124b08feb835f12e00a879bd15666a33786e64b655891fba7d6c12&quot;
+}
+}
+],
+&quot;more&quot;: false
+}
+</code></pre>
+<p>alice 揭示他的code，游戏就结束了，赢得是alice（没看懂怎么赢得）</p>
+<pre><code class="language-python">cleos push action dice reveal '[ &quot;d533f24d6f28ddcef3f066474f7b8355383e485681ba8e793e037f5cf36e4883&quot;, &quot;28349b1d4bcdc9905e4ef9719019e55743c84efa0c5e9a0b077f0b54fcd84905&quot; ]' -p alice
+executed transaction: 16400e6850ea39d3afec89cf257e840248ea2d515533b785d72e0dc8e431f8ef 288 bytes 110592 cycles
+# dice &lt;= dice::reveal {&quot;commitment&quot;:&quot;d533f24d6f28ddcef3f066474f7b8355383e485681ba8e793e037f5cf36e4883&quot;,&quot;source&quot;:&quot;28349b1d4...
+</code></pre>
+<p>对一下账号信息</p>
+<pre><code class="language-python">cleos get table dice dice account
+{
+&quot;rows&quot;: [{
+&quot;owner&quot;: &quot;alice&quot;,
+&quot;eos_balance&quot;: &quot;103.0000 EOS&quot;,
+&quot;open_offers&quot;: 0,
+&quot;open_games&quot;: 0
+},{
+&quot;owner&quot;: &quot;bob&quot;,
+&quot;eos_balance&quot;: &quot;97.0000 EOS&quot;,
+&quot;open_offers&quot;: 0,
+&quot;open_games&quot;: 0
+}
+],
+&quot;more&quot;: false
+}
+</code></pre>
+<p>alice拿走 押金和赢的赌注</p>
+<pre><code class="language-python">cleos push action dice withdraw '[ &quot;alice&quot;, &quot;103.0000 EOS&quot; ]' -p alice
+executed transaction: 6e9524dfe59dc79c0016c7afa5c080368b1f09eacd9b0823340051183aca10a7 248 bytes 124928 cycles
+# dice &lt;= dice::withdraw {&quot;to&quot;:&quot;alice&quot;,&quot;a&quot;:&quot;103.0000 EOS&quot;}
+# eosio.token &lt;= eosio.token::transfer {&quot;from&quot;:&quot;dice&quot;,&quot;to&quot;:&quot;alice&quot;,&quot;quantity&quot;:&quot;103.0000 EOS&quot;,&quot;memo&quot;:&quot;&quot;}
+&gt;&gt; transfer
+# dice &lt;= eosio.token::transfer {&quot;from&quot;:&quot;dice&quot;,&quot;to&quot;:&quot;alice&quot;,&quot;quantity&quot;:&quot;103.0000 EOS&quot;,&quot;memo&quot;:&quot;&quot;}
+# alice &lt;= eosio.token::transfer {&quot;from&quot;:&quot;dice&quot;,&quot;to&quot;:&quot;alice&quot;,&quot;quantity&quot;:&quot;103.0000 EOS&quot;,&quot;memo&quot;:&quot;&quot;}
+</code></pre>
+<p>最后再查询一下alice的balance（未通过）</p>
+<pre><code class="language-python">cleos get currency balance eosio.token alice eos
+1003.0000 EOS
+</code></pre>
+
+<!-- Source file information -->
+
+
+<!-- Was this page helpful? -->
+
+
+
+
+<!-- Comment system -->
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../EOSIO%20%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E6%95%B0%E6%8D%AE%E5%BA%93%E6%BC%94%E7%BB%83/" class="md-footer__link md-footer__link--prev" aria-label="Previous: EOSIO 智能合约数据库演练" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              EOSIO 智能合约数据库演练
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../%E5%BF%83%E5%BF%83%E5%BF%B5%E5%BF%B5%E7%9A%84%20Lover%20Wall%203.0%E7%89%88%E6%9C%AC%E6%9D%A5%E4%BA%86%28%E5%8E%9F%E5%88%9B%29/" class="md-footer__link md-footer__link--next" aria-label="Next: 心心念念的 Lover Wall 3.0版本来了(原创)" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              心心念念的 Lover Wall 3.0版本来了(原创)
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.8492ddcf.min.js"></script>
+      
+    
+  </body>
+</html>

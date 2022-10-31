@@ -1,0 +1,1335 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.1, mkdocs-material-8.5.7">
+    
+    
+      
+        <title>EOS 智能合约模板 (二) - EOS Tutorials</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.20d9efc8.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="EOS Tutorials" class="md-header__button md-logo" aria-label="EOS Tutorials" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            EOS Tutorials
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              EOS 智能合约模板 (二)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="EOS Tutorials" class="md-nav__button md-logo" aria-label="EOS Tutorials" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    EOS Tutorials
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        eos-tutorials
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Cleos
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Cleos" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Cleos
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cleos/EOS%20Dawn%203.0%20cleos%20%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/" class="md-nav__link">
+        创建缺省wallet
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cleos/cleos%20%E5%91%BD%E4%BB%A4%E5%A4%A7%E5%85%A8%E4%B9%8B%20wallet%20%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        cleos 钱包命令
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          小白入门
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="小白入门" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          小白入门
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%B0%8F%E7%99%BD%E5%85%A5%E9%97%A8/EOS%20%E5%AE%89%E8%A3%85%E6%9C%AC%E5%9C%B0%E7%8E%AF%E5%A2%83%EF%BC%8C%E5%B9%B6%E5%AE%9E%E7%8E%B0%E5%8F%91%E5%B8%81%E8%BD%AC%E8%B4%A6%E7%AD%89%E5%8A%9F%E8%83%BD/" class="md-nav__link">
+        EOS 安装本地环境，并实现发币转账等功能
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%B0%8F%E7%99%BD%E5%85%A5%E9%97%A8/%E5%9F%BA%E4%BA%8E%20linux%20%E7%9A%84%20eos%20%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84%E5%9D%91%20%281%29/" class="md-nav__link">
+        基于 linux 的 eos 开发中的坑 (1)
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          开发使用
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="开发使用" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          开发使用
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BC%80%E5%8F%91%E4%BD%BF%E7%94%A8/EOS%20%E5%B8%90%E6%88%B7%E6%9D%83%E9%99%90%E6%93%8D%E4%BD%9C%EF%BC%8D%EF%BC%8D%E4%BD%A0%E6%89%BE%E4%B8%8D%E5%88%B0%E7%9A%84%E5%B9%B2%E8%B4%A7%20%28%E5%8E%9F%E5%88%9B%29%20%E7%BB%AD%E9%9B%86-EOS%203.0/" class="md-nav__link">
+        EOS 帐户权限 3.0
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BC%80%E5%8F%91%E4%BD%BF%E7%94%A8/EOS%20%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E4%B9%8B-%E6%9D%83%E9%99%90%E7%9A%84%E4%BD%BF%E7%94%A8%20%28%E4%BD%A0%E7%BB%9D%E5%AF%B9%E6%89%BE%E4%B8%8D%E5%88%B0%E7%9A%84%E5%B9%B2%E8%B4%A7%29/" class="md-nav__link">
+        EOS 权限管理之 权限的使用 (你绝对找不到的干货)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BC%80%E5%8F%91%E4%BD%BF%E7%94%A8/EOS3.0%20%E6%B5%8B%E8%AF%95%E7%BD%91%E7%BB%9C%E7%BB%84%E5%BB%BA-EOS%20%E4%B8%AD%E6%96%87%E7%A4%BE%E5%8C%BA%E7%89%B9%E8%BE%91/" class="md-nav__link">
+        EOS3.0测试网络组建-EOS中文社区特辑
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BC%80%E5%8F%91%E4%BD%BF%E7%94%A8/EOSIO%204.0%E6%B5%8B%E8%AF%95%E7%BD%91%E7%BB%9C%E5%90%AF%E5%8A%A8%E6%95%99%E7%A8%8B/" class="md-nav__link">
+        EOSIO 4.0测试网络启动教程
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BC%80%E5%8F%91%E4%BD%BF%E7%94%A8/EOSIO%20%E8%BD%AC%E5%B8%90%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+        EOSIO 转帐详解
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BC%80%E5%8F%91%E4%BD%BF%E7%94%A8/EOSIO3.0%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/" class="md-nav__link">
+        EOSIO3.0数据库使用指南
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BC%80%E5%8F%91%E4%BD%BF%E7%94%A8/EOS%E5%AD%A6%E4%B9%A0%E9%98%B6%E6%AE%B5%E6%80%A7%E6%80%BB%E7%BB%93/" class="md-nav__link">
+        EOS学习阶段性总结
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          开发工具
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="开发工具" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          开发工具
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/EOS%20%E5%BC%80%E5%8F%91%E7%BB%88%E6%9E%81%E7%A5%9E%E5%99%A8%EF%BC%8Dvscode%20%28%E4%BD%A0%E7%BB%9D%E5%AF%B9%E6%89%BE%E4%B8%8D%E5%88%B0%E7%9A%84%E5%B9%B2%E8%B4%A7%29/" class="md-nav__link">
+        EOS开发终极神器－vscode(你绝对找不到的干货)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/Qt%20Creator%20%E5%BC%80%E5%8F%91%20EOS%203.0%20%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/" class="md-nav__link">
+        下载和安装Qt Creator
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/%E8%B4%A1%E7%8C%AE%E4%B8%80%E4%B8%AA%E6%B5%8B%E8%AF%95%E5%9F%BA%E7%A1%80%E5%8A%9F%E8%83%BD%E7%9A%84%20shell%20%E8%84%9A%E6%9C%AC/" class="md-nav__link">
+        贡献一个测试基础功能的 shell 脚本
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6">
+          智能合约
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="智能合约" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          智能合约
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        EOS 智能合约模板 (二)
+      </a>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../EOS%20%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E6%A8%A1%E6%9D%BF/" class="md-nav__link">
+        1.  支持类型说明和调用实例
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../EOS3.0-HelloWorld%E6%95%99%E7%A8%8B/" class="md-nav__link">
+        EOSIO3.0 hello world 从0到1
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../EOS3.0-%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/" class="md-nav__link">
+        EOSIO 3.0 使用指南
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../EOS3.0-%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/" class="md-nav__link">
+        EOSIO 智能合约
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../EOSIO%20%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E6%95%B0%E6%8D%AE%E5%BA%93%E6%BC%94%E7%BB%83/" class="md-nav__link">
+        EOSIO 智能合约数据库演练
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dice%20%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E5%BA%94%E8%AF%A5%E8%BF%99%E4%B9%88%E7%8E%A9/" class="md-nav__link">
+        1. dice 玩法说明
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%BF%83%E5%BF%83%E5%BF%B5%E5%BF%B5%E7%9A%84%20Lover%20Wall%203.0%E7%89%88%E6%9C%AC%E6%9D%A5%E4%BA%86%28%E5%8E%9F%E5%88%9B%29/" class="md-nav__link">
+        心心念念的 Lover Wall 3.0版本来了(原创)
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7">
+          精品文章
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="精品文章" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          精品文章
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%B2%BE%E5%93%81%E6%96%87%E7%AB%A0/%E4%B8%80%E4%B8%AA%E9%92%88%E5%AF%B9EOSIO%E5%8C%BA%E5%9D%97%E7%94%9F%E4%BA%A7%E5%91%98%E7%9A%84DDOS%E6%94%BB%E5%87%BB%E7%9A%84%E7%BC%93%E8%A7%A3%E6%96%B9%E6%A1%88/" class="md-nav__link">
+        一个针对EOSIO区块生产员的DDOS攻击的缓解方案
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  <!--
+  Copyright (c) 2016-2022 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Tags -->
+
+
+<!-- Actions -->
+
+
+<!--
+  Hack: check whether the content contains a h1 headline. If it doesn't, the
+  page title (or respectively site name) is used as the main headline.
+-->
+
+  <h1>EOS 智能合约模板 (二)</h1>
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3023358183033336"
+     crossorigin="anonymous"></script>
+<!-- eos-tutorials -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-3023358183033336"
+     data-ad-slot="3442397541"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<!-- Page content -->
+<p>介绍相关的说明，请看第一篇文章。</p>
+<p>文章地址： <a href="https://eosfans.io/topics/291">https://eosfans.io/topics/291</a></p>
+<p>测试前的准备工作</p>
+<pre><code class="language-python">cleos wallet create
+Creating wallet: default
+Save password to use in the future to unlock this wallet.
+Without password imported keys will not be retrievable.
+&quot;PW5J52mvxVqEk86LS4Qgm7Y3DjYNiEkk4AubdrDbJsQ7JsYxJUR5q&quot;
+
+cleos create key
+Private key: 5KkzGioGeYGcvRGEyXgeESU2HjW7yvbQpWcv4F7tnZN73UDwsSG
+Public key: EOS69QCKy2zWQge28nxyLHMPHooXHMMoqMfEWSdB87tfmWNFDpbqM
+
+cleos wallet import 5KkzGioGeYGcvRGEyXgeESU2HjW7yvbQpWcv4F7tnZN73UDwsSG
+imported private key for: EOS69QCKy2zWQge28nxyLHMPHooXHMMoqMfEWSdB87tfmWNFDpbqM
+
+cleos create account eosio user EOS69QCKy2zWQge28nxyLHMPHooXHMMoqMfEWSdB87tfmWNFDpbqM EOS69QCKy2zWQge28nxyLHMPHooXHMMoqMfEWSdB87tfmWNFDpbqM
+executed transaction: f4568d203bb872345ba8c79ec6de996214e1f08e5b34521552947c497d4a20f6 352 bytes 102400 cycles
+# eosio &lt;= eosio::newaccount {&quot;creator&quot;:&quot;eosio&quot;,&quot;name&quot;:&quot;user&quot;,&quot;owner&quot;:{&quot;threshold&quot;:1,&quot;keys&quot;:[{&quot;key&quot;:&quot;EOS69QCKy2zWQge28nxyLHMPHooX...
+
+cleos set contract user contracts/hello -p user
+Reading WAST/WASM from contracts/hello/hello.wast...
+Assembling WASM...
+Publishing contract...
+executed transaction: 3aad99fd4416caf8aa51af0db06ef0bbe88ccc2f6c4d28384f1979c7922022b1 1656 bytes 2200576 cycles
+# eosio &lt;= eosio::setcode {&quot;account&quot;:&quot;user&quot;,&quot;vmtype&quot;:0,&quot;vmversion&quot;:0,&quot;code&quot;:&quot;0061736d01000000012e0960027f7f0060027e7e0060017f0...
+# eosio &lt;= eosio::setabi {&quot;account&quot;:&quot;user&quot;,&quot;abi&quot;:{&quot;types&quot;:[],&quot;structs&quot;:[{&quot;name&quot;:&quot;tpublickey&quot;,&quot;base&quot;:&quot;&quot;,&quot;fields&quot;:[{&quot;name&quot;:&quot;key...
+</code></pre>
+<p>测试未通过的模板</p>
+<pre><code class="language-python">
+// field fields
+// signed_transaction
+// type_def action_def table_def abi_def types
+</code></pre>
+<p>测试合约，下面就不介绍了，直接上代码。</p>
+<pre><code class="language-python">void tpublickey (public_key key) {
+eosio::print(&quot;tpubckey:\n&quot;);
+}
+
+cleos push action user tpublickey '[&quot;EOS6JTKqeXTYmbyYURFJg2HmAbVzc4sPpP7LxhubmGn8SD3p9WibQ&quot;]' -p user
+executed transaction: 962b6ed1ff3c8238de353fe1849ab1cd2351b58ba547592eef52938312a05b35 256 bytes 102400 cycles
+# user &lt;= user::tpublickey {&quot;key&quot;:&quot;EOS6JTKqeXTYmbyYURFJg2HmAbVzc4sPpP7LxhubmGn8SD3p9WibQ&quot;}
+&gt;&gt; tpubckey:
+</code></pre>
+<pre><code class="language-python">// @abi action
+void tpkarr (std::vector&lt;public_key&gt; keyarr) {
+eosio::print(&quot;tpkarr:\n&quot;);
+}
+
+cleos push action user tpkarr '[[&quot;EOS6JTKqeXTYmbyYURFJg2HmAbVzc4sPpP7LxhubmGn8SD3p9WibQ&quot;]]' -p user
+executed transaction: 00ff309598802ee9768f69b5781a552262fc9919bd3121e44ad98c72e38f7d3a 256 bytes 103424 cycles
+# user &lt;= user::tpkarr {&quot;keyarr&quot;:[&quot;EOS6JTKqeXTYmbyYURFJg2HmAbVzc4sPpP7LxhubmGn8SD3p9WibQ&quot;]}
+&gt;&gt; tpkarr:
+</code></pre>
+<pre><code class="language-python">// @abi action
+void tasset (asset arg) {
+eosio::print(&quot;tasset:&quot;,arg,&quot;\n&quot;);
+}
+
+
+cleos push action user tasset '[&quot;100.0000 EOS&quot;]' -p user
+executed transaction: bacccdaa7a10a856d8fb8ee21f9d2020c54dd28ff83af2235da2e420aecb5ee4 240 bytes 102400 cycles
+# user &lt;= user::tasset {&quot;arg&quot;:&quot;100.0000 EOS&quot;}
+&gt;&gt; tasset:100.0000 EOS
+</code></pre>
+<pre><code class="language-python">// @abi action
+void tstring (std::string str) {
+eosio::print(&quot;tstring:&quot;,str.c_str(),&quot;\n&quot;); 
+}
+
+cleos push action user tstring '[&quot;OuterSt 9527&quot;]' -p user
+executed transaction: 6ac9a4ed6114a6d9244faf40f7c7195de2f91b913f6c48ca1cc6ca6f78a79742 240 bytes 105472 cycles
+# user &lt;= user::tstring {&quot;str&quot;:&quot;OuterSt 9527&quot;}
+&gt;&gt; tstring:OuterSt 9527
+</code></pre>
+<pre><code class="language-python">// // @abi action
+void tstringarr (std::vector&lt;std::string&gt; args) {
+eosio::print(&quot;tstringarr:\n&quot;); 
+for (auto &amp;arg:args)
+{
+eosio::print(arg.c_str(),&quot;\n&quot;);
+}
+}
+
+cleos push action user tstringarr '[[&quot;OuterSt 9527&quot;,&quot;9527 OuterST&quot;]]' -p user
+executed transaction: 9e1406a19f8f89b483e49e71257decbac4c0d4002167466b7b2c130c8bc6bb4f 248 bytes 112640 cycles
+# user &lt;= user::tstringarr {&quot;args&quot;:[&quot;OuterSt 9527&quot;,&quot;9527 OuterST&quot;]}
+&gt;&gt; tstringarr:
+</code></pre>
+<pre><code class="language-python">// @abi action
+void tsignature(signature arg){
+//eosio::print(&quot;tsignature:&quot;,arg,&quot;\n&quot;);
+
+}
+
+cleos push action user tsignature '[&quot;EOSJzdpi5RCzHLGsQbpGhndXBzcFs8vT5LHAtWLMxPzBdwRHSmJkcCdVu6oqPUQn1hbGUdErHvxtdSTS1YA73BThQFwT77X1U&quot;]' -p user
+executed transaction: 4c2086311b56d4ac4ad11975b0f11a180609c9a8de7c91d3bdd1def756a65aa9 288 bytes 102400 cycles
+# user &lt;= user::tsignature {&quot;arg&quot;:&quot;EOSJzdpi5RCzHLGsQbpGhndXBzcFs8vT5LHAtWLMxPzBdwRHSmJkcCdVu6oqPUQn1hbGUdErHvxtdSTS1YA73BThQFwT...
+</code></pre>
+<pre><code class="language-python">
+// @abi action
+void tsgarr(std::vector&lt;signature&gt; args) {
+// eosio::print(&quot;tsgarr:&quot;,args,&quot;\n&quot;);
+// for (auto &amp;arg:args)
+// {
+// eosio::print(arg,&quot;\n&quot;);
+// }
+}
+
+cleos push action user tsgarr '[[&quot;EOSJzdpi5RCzHLGsQbpGhndXBzcFs8vT5LHAtWLMxPzBdwRHSmJkcCdVu6oqPUQn1hbGUdErHvxtdSTS1YA73BThQFwT77X1U&quot;,&quot;EOSJzdpi5RCzHLGsQbpGhndXBzcFs8vT5LHAtWLMxPzBdwRHSmJkcCdVu6oqPUQn1hbGUdErHvxtdSTS1YA73BThQFwT77X1U&quot;]]' -p user
+executed transaction: 6e42e1699eaaf91f575ccef9e58e6aea4697e8ff59aeb1d9f655bd47b0adf909 360 bytes 104448 cycles
+# user &lt;= user::tsgarr {&quot;args&quot;:[&quot;EOSJzdpi5RCzHLGsQbpGhndXBzcFs8vT5LHAtWLMxPzBdwRHSmJkcCdVu6oqPUQn1hbGUdErHvxtdSTS1YA73BThQF...
+
+</code></pre>
+<pre><code class="language-python">// @abi action
+void tchecksum(checksum256 arg){
+//eosio::print(&quot;tchecksum:&quot;,arg,&quot;\n&quot;);
+}
+
+cleos push action user tchecksum '[&quot;ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad&quot;]' -p userexecuted transaction: 63b7dc53738c655bcb980db743ea533695462840288070dabf25bba131ced877 256 bytes 102400 cycles
+# user &lt;= user::tchecksum {&quot;arg&quot;:&quot;ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad&quot;}
+</code></pre>
+<pre><code class="language-python">// @abi action
+void tfixedstr32(fixed_string32 arg) {
+//eosio::print(&quot;tfixedstring32:&quot;,arg,&quot;\n&quot;);
+}
+
+cleos push action user tfixedstr32 '[&quot;1234567890abcdef1234567890abcdef&quot;]' -p user
+executed transaction: bdb03cd8965d284fe47aa31a66386f93082c0014bc59cf801ad1eaf042513c45 256 bytes 102400 cycles
+# user &lt;= user::tfixedstr32 {&quot;arg&quot;:&quot;1234567890abcdef1234567890abcdef&quot;}
+</code></pre>
+<pre><code class="language-python">//fixedstring16
+//@abi action
+void tfixedstring(fixed_string16 arg) {
+//eosio::print(&quot;tfixedstring16:&quot;,arg,&quot;\n&quot;);
+}
+
+cleos push action user tfixedstring '[&quot;1234567890abcdef&quot;]' -p user
+executed transaction: b9ecd59ad75028d8c74e201e5404ee437b2639f020cf2823fc7fdaf40aa1100e 240 bytes 102400 cycles
+# user &lt;= user::tfixedstring {&quot;arg&quot;:&quot;1234567890abcdef&quot;}
+</code></pre>
+<pre><code class="language-python">// @abi action
+void tbytes (bytes arg) {
+// eosio::print(&quot;tbytes:&quot;,arg,&quot;\n&quot;);
+}
+
+cleos push action user tbytes '[&quot;010203&quot;]' -p user
+executed transaction: 205550d29b2785d40b5b52f0f74f25fa480ae2b6f8176b0a1ff472770422e5cb 232 bytes 103424 cycles
+# user &lt;= user::tbytes {&quot;arg&quot;:&quot;010203&quot;}
+</code></pre>
+<pre><code class="language-python">// @abi action
+void tname(name arg) {
+eosio::print(&quot;tname:&quot;,arg,&quot;\n&quot;);
+}
+
+cleos push action user tname '[&quot;user&quot;]' -p user
+executed transaction: 7d6f7db9427281a275235f988f572efd8bd26ec9a113b6101b89ac5dfc1040a2 232 bytes 102400 cycles
+# user &lt;= user::tname {&quot;arg&quot;:&quot;user&quot;}
+&gt;&gt; tname:user
+</code></pre>
+<pre><code class="language-python">// @abi action
+void taccountname(account_name arg) {
+eosio::print(&quot;taccountname:&quot;,arg,&quot;\n&quot;);
+}
+
+cleos push action user taccountname '[&quot;user&quot;]' -p user
+executed transaction: 0861837a5fdb9fdce2ffa19db2912ef03c54220a710f532f0a35545b91900e47 232 bytes 102400 cycles
+# user &lt;= user::taccountname {&quot;arg&quot;:&quot;user&quot;}
+&gt;&gt; taccountname:15426359243929812992
+</code></pre>
+<pre><code class="language-python">// @abi action
+void tpermname(permission_name arg) {
+eosio::print(&quot;tpermname:&quot;,arg,&quot;\n&quot;);
+}
+
+cleos push action user tpermname '[&quot;active&quot;]' -p user
+executed transaction: a1d046d5b882a851f171048d8054791ee1151007575a1488e867561c49af3ec5 232 bytes 102400 cycles
+# user &lt;= user::tpermname {&quot;arg&quot;:&quot;active&quot;}
+&gt;&gt; tpermname:3617214756542218240
+</code></pre>
+<pre><code class="language-python">
+// @abi action
+void tactionname(action_name arg){
+eosio::print(&quot;tactionname:&quot;,arg,&quot;\n&quot;); 
+}
+
+cleos push action user tactionname '[&quot;active&quot;]' -p user
+executed transaction: 14c98043bff1225c98eaaa81ddfeb41fa4d05e6cc2a88fa8416dc00f37f20310 232 bytes 102400 cycles
+# user &lt;= user::tactionname {&quot;arg&quot;:&quot;active&quot;}
+&gt;&gt; tactionname:3617214756542218240
+</code></pre>
+<pre><code class="language-python">// @abi action
+void tscopename(scope_name arg) {
+eosio::print(&quot;tscopename:&quot;,arg,&quot;\n&quot;); 
+}
+
+cleos push action user tscopename '[&quot;scope&quot;]' -p user
+executed transaction: a63d0acc81397129dec2bef6f2f643930a4328d9961ad53415752edd3722b8a1 232 bytes 102400 cycles
+# user &lt;= user::tscopename {&quot;arg&quot;:&quot;scope&quot;}
+&gt;&gt; tscopename:13990807175891517440
+</code></pre>
+<pre><code class="language-python">// @abi action
+void tpermlvl(permission_level arg) {
+//eosio::print(&quot;tpermlvl:&quot;,arg,&quot;\n&quot;); 
+}
+
+cleos push action user tpermlvl '[{&quot;account&quot;:&quot;acc1&quot;, &quot;name&quot;:&quot;actionname1&quot;, &quot;authorization&quot;:[{&quot;actor&quot;:&quot;acc1&quot;,&quot;permission&quot;:&quot;permname1&quot;}], &quot;data&quot;:&quot;445566&quot;},]' -p user
+executed transaction: 7c0c5d052d199f881d7aabce2bd817b1bb22ac5e5d6c30353c679124e389908b 240 bytes 102400 cycles
+# user &lt;= user::tpermlvl {&quot;arg&quot;:{&quot;actor&quot;:&quot;&quot;,&quot;permission&quot;:&quot;&quot;}}
+</code></pre>
+<pre><code class="language-python">
+// @abi action
+void taction(action arg) {
+//eosio::print(&quot;taction:&quot;,arg,&quot;\n&quot;); 
+}
+
+cleos push action user taction '[{&quot;account&quot;:&quot;acc1&quot;, &quot;name&quot;:&quot;actionname1&quot;, &quot;authorization&quot;:[{&quot;actor&quot;:&quot;acc1&quot;,&quot;permission&quot;:&quot;permname1&quot;}], &quot;data&quot;:&quot;445566&quot;}]' -p user
+executed transaction: 2c5906b2b2ee005c3b782441f4be6102940b02d84f80ff7c5d464fa85e812071 264 bytes 105472 cycles
+# user &lt;= user::taction {&quot;arg&quot;:{&quot;account&quot;:&quot;acc1&quot;,&quot;name&quot;:&quot;actionname1&quot;,&quot;authorization&quot;:[{&quot;actor&quot;:&quot;acc1&quot;,&quot;permission&quot;:&quot;permnam...
+</code></pre>
+<pre><code class="language-python">// @abi action
+void tpermlvlwgt(eosiosystem::permission_level_weight arg){
+//eosio::print(&quot;taction:&quot;,arg,&quot;\n&quot;); 
+}
+
+cleos push action user tpermlvlwgt '[{&quot;permission&quot;:{&quot;actor&quot;:&quot;acc1&quot;,&quot;permission&quot;:&quot;permname1&quot;},&quot;weight&quot;:&quot;1&quot;}]' -p user
+executed transaction: b06342593cfca38d7367eebca0a63bc7c4919b132de2fa0713feb422d3c1e4cb 240 bytes 102400 cycles
+# user &lt;= user::tpermlvlwgt {&quot;arg&quot;:{&quot;permission&quot;:{&quot;actor&quot;:&quot;acc1&quot;,&quot;permission&quot;:&quot;permname1&quot;},&quot;weight&quot;:1}}
+</code></pre>
+<pre><code class="language-python">// @abi action
+void ttransaction(transaction arg) {
+
+}
+
+cleos push action user ttransaction '[{&quot;ref_block_num&quot;:&quot;1&quot;,&quot;ref_block_prefix&quot;:&quot;2&quot;,&quot;expiration&quot;:&quot;2021-12-20T15:30&quot;,&quot;region&quot;: &quot;1&quot;,&quot;context_free_actions&quot;:[{&quot;account&quot;:&quot;contextfree1&quot;, &quot;name&quot;:&quot;cfactionname1&quot;, &quot;authorization&quot;:[{&quot;actor&quot;:&quot;cfacc1&quot;,&quot;permission&quot;:&quot;cfpermname1&quot;}], &quot;data&quot;:&quot;778899&quot;}],&quot;actions&quot;:[{&quot;account&quot;:&quot;accountname1&quot;, &quot;name&quot;:&quot;actionname1&quot;, &quot;authorization&quot;:[{&quot;actor&quot;:&quot;acc1&quot;,&quot;permission&quot;:&quot;permname1&quot;}], &quot;data&quot;:&quot;445566&quot;}],&quot;net_usage_words&quot;:15,&quot;kcpu_usage&quot;:43,&quot;delay_sec&quot;:0}]' -p user
+Error 3030000: transaction validation exception
+Ensure that your transaction satisfy the contract's constraint!
+Error Details:
+condition: assertion failed: read
+</code></pre>
+<pre><code class="language-python">// @abi action
+void tkeyweight(key_weight arg) {
+
+}
+
+cleos push action user tkeyweight '[{&quot;key&quot;:&quot;EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV&quot;, &quot;weight&quot;:&quot;100&quot;}]' -p user
+executed transaction: 5f377f0c85335ce017e034ed5362636238badeda146b1f8a9d6c7d44d2e35430 264 bytes 102400 cycles
+# user &lt;= user::tkeyweight {&quot;arg&quot;:{&quot;key&quot;:&quot;EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV&quot;,&quot;weight&quot;:100}}
+</code></pre>
+<pre><code class="language-python">
+// @abi action
+void tauthority(authority arg) {
+
+}
+
+cleos push action user tauthority '[{&quot;threshold&quot;:&quot;10&quot;,&quot;keys&quot;:[{&quot;key&quot;:&quot;EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV&quot;, &quot;weight&quot;:100},{&quot;key&quot;:&quot;EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV&quot;, &quot;weight&quot;:200}],&quot;accounts&quot;:[{&quot;permission&quot;:{&quot;actor&quot;:&quot;acc1&quot;,&quot;permission&quot;:&quot;permname1&quot;},&quot;weight&quot;:&quot;1&quot;},{&quot;permission&quot;:{&quot;actor&quot;:&quot;acc2&quot;,&quot;permission&quot;:&quot;permname2&quot;},&quot;weight&quot;:&quot;2&quot;}]}]' -p user
+executed transaction: 75182d443993274585e8f23368ba8d963d60fd15b1afd30aa64a28ee57ec2ffb 336 bytes 105472 cycles
+# user &lt;= user::tauthority {&quot;arg&quot;:{&quot;threshold&quot;:10,&quot;keys&quot;:[{&quot;key&quot;:&quot;EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV&quot;,&quot;weigh...
+</code></pre>
+<p>cpp文件</p>
+<pre><code class="language-python">#include &lt;utility&gt;
+#include &lt;vector&gt;
+#include &lt;string&gt;
+#include &lt;eosiolib/eosio.hpp&gt;
+#include &lt;eosiolib/asset.hpp&gt;
+#include &lt;eosiolib/contract.hpp&gt;
+#include &lt;eosiolib/crypto.h&gt;
+#include &lt;eosiolib/transaction.hpp&gt;
+
+using eosio::permission_level;
+
+#include &lt;eosio.system/native.hpp&gt;
+
+
+using eosio::key256;
+using eosio::indexed_by;
+using eosio::const_mem_fun;
+using eosio::asset;
+using eosio::bytes;
+using eosio::action;
+using eosio::print;
+using eosio::name;
+using eosio::transaction;
+using eosiosystem::key_weight;
+using eosiosystem::authority;
+
+
+
+class hello : public eosio::contract { 
+    public:
+         hello(account_name self)
+        :eosio::contract(self)
+        {}
+
+        // @abi action
+        void tpublickey (public_key key) {
+            eosio::print(&quot;tpubckey:\n&quot;);
+        }
+
+        // @abi action
+        void tpkarr (std::vector&lt;public_key&gt; keyarr) {
+            eosio::print(&quot;tpkarr:\n&quot;);
+        }
+
+        // @abi action
+        void tasset (asset arg) {
+            eosio::print(&quot;tasset:&quot;,arg,&quot;\n&quot;);
+        }
+
+        // @abi action
+        void tassetarr(std::vector&lt;asset&gt; args) {
+            eosio::print(&quot;tassetarr:\n&quot;);   
+            for (auto &amp;arg :args)
+            {
+                eosio::print(arg,&quot;\n&quot;);
+            }
+        }
+
+        // @abi action
+        void tstring (std::string str) {
+            eosio::print(&quot;tstring:&quot;,str.c_str(),&quot;\n&quot;);  
+        }
+
+        // // @abi action
+        void tstringarr (std::vector&lt;std::string&gt; args) {
+            eosio::print(&quot;tstringarr:\n&quot;);  
+            for (auto &amp;arg:args)
+            {
+                eosio::print(arg.c_str(),&quot;\n&quot;);
+            }
+        }
+
+        // @abi action
+        void tsignature(signature arg){
+            //eosio::print(&quot;tsignature:&quot;,arg,&quot;\n&quot;);
+
+        }
+
+        // @abi action
+        void tsgarr(std::vector&lt;signature&gt; args) {
+            // eosio::print(&quot;tsgarr:&quot;,args,&quot;\n&quot;);
+            // for (auto &amp;arg:args)
+            // {
+            //  eosio::print(arg,&quot;\n&quot;);
+            // }
+        }
+
+        // @abi action
+        void tchecksum(checksum256 arg){
+            //eosio::print(&quot;tchecksum:&quot;,arg,&quot;\n&quot;);
+        }
+
+        // @abi action
+        void tchecksumarr(std::vector&lt;checksum256&gt; args) {
+            eosio::print(&quot;tchecksumarr:\n&quot;);    
+        }
+
+        //error
+        // @abi action
+        void tfieldname (field_name arg) {
+            //eosio::print(&quot;tfieldname:&quot;,arg,&quot;\n&quot;);
+        }
+
+        // @abi action
+        void tfixedstr32(fixed_string32 arg) {
+            //eosio::print(&quot;tfixedstring32:&quot;,arg,&quot;\n&quot;);
+        }
+
+        //fixedstring16
+        //@abi action
+        void tfixedstring(fixed_string16 arg) {
+            //eosio::print(&quot;tfixedstring16:&quot;,arg,&quot;\n&quot;);
+        }
+
+        // @abi action
+        void ttypename(type_name arg) {
+            //eosio::print(&quot;ttypename:&quot;,arg,&quot;\n&quot;);
+        }
+
+        // @abi action
+        void tbytes (bytes arg) {
+            // eosio::print(&quot;tbytes:&quot;,arg,&quot;\n&quot;);
+        }
+
+        // @abi action
+        void tname(name arg) {
+            eosio::print(&quot;tname:&quot;,arg,&quot;\n&quot;);
+        }
+
+        // @abi action
+        void taccountname(account_name arg) {
+            eosio::print(&quot;taccountname:&quot;,arg,&quot;\n&quot;);
+        }
+
+        // @abi action
+        void tpermname(permission_name arg) {
+            eosio::print(&quot;tpermname:&quot;,arg,&quot;\n&quot;);
+        }
+
+        // @abi action
+        void tactionname(action_name arg){
+            eosio::print(&quot;tactionname:&quot;,arg,&quot;\n&quot;);  
+        }
+
+        // @abi action
+        void tscopename(scope_name arg) {
+            eosio::print(&quot;tscopename:&quot;,arg,&quot;\n&quot;);   
+        }
+
+        // @abi action
+        void tpermlvl(permission_level arg) {
+            //eosio::print(&quot;tpermlvl:&quot;,arg,&quot;\n&quot;);   
+        }
+
+        // @abi action
+        void taction(action arg) {
+            //eosio::print(&quot;taction:&quot;,arg,&quot;\n&quot;);    
+        }
+
+        // @abi action
+        void tpermlvlwgt(eosiosystem::permission_level_weight arg){
+            //eosio::print(&quot;taction:&quot;,arg,&quot;\n&quot;);    
+        }
+
+        // @abi action
+        void ttransaction(transaction arg) {
+
+        }
+
+        // @abi action
+        void tkeyweight(key_weight arg) {
+
+        }
+
+        // @abi action
+        void tauthority(authority arg) {
+
+        }
+
+        //
+        // field fields
+        // signed_transaction
+        // type_def action_def table_def abi_def  types  
+
+};
+
+EOSIO_ABI( hello, (tpublickey)(tpkarr)(tasset)(tassetarr)(tstring) (tstringarr)(tsignature)(tsgarr)(tchecksum)(tchecksumarr)(tfieldname)(tfixedstr32)(tfixedstring)(ttypename)(tbytes)(tname)(taccountname)(tpermname)(tactionname)(tscopename)(tpermlvl)(taction)(tpermlvlwgt)(ttransaction)(tkeyweight)(tauthority)
+    )
+</code></pre>
+
+<!-- Source file information -->
+
+
+<!-- Was this page helpful? -->
+
+
+
+
+<!-- Comment system -->
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../../%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/%E8%B4%A1%E7%8C%AE%E4%B8%80%E4%B8%AA%E6%B5%8B%E8%AF%95%E5%9F%BA%E7%A1%80%E5%8A%9F%E8%83%BD%E7%9A%84%20shell%20%E8%84%9A%E6%9C%AC/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 贡献一个测试基础功能的 shell 脚本" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              贡献一个测试基础功能的 shell 脚本
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../EOS%20%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E6%A8%A1%E6%9D%BF/" class="md-footer__link md-footer__link--next" aria-label="Next: 1.  支持类型说明和调用实例" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              1.  支持类型说明和调用实例
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.8492ddcf.min.js"></script>
+      
+    
+  </body>
+</html>

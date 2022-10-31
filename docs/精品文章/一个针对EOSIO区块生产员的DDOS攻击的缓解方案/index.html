@@ -1,0 +1,1202 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.1, mkdocs-material-8.5.7">
+    
+    
+      
+        <title>一个针对EOSIO区块生产员的DDOS攻击的缓解方案 - EOS Tutorials</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.20d9efc8.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="EOS Tutorials" class="md-header__button md-logo" aria-label="EOS Tutorials" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            EOS Tutorials
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              一个针对EOSIO区块生产员的DDOS攻击的缓解方案
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="EOS Tutorials" class="md-nav__button md-logo" aria-label="EOS Tutorials" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    EOS Tutorials
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        eos-tutorials
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Cleos
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Cleos" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Cleos
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cleos/EOS%20Dawn%203.0%20cleos%20%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/" class="md-nav__link">
+        创建缺省wallet
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cleos/cleos%20%E5%91%BD%E4%BB%A4%E5%A4%A7%E5%85%A8%E4%B9%8B%20wallet%20%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        cleos 钱包命令
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          小白入门
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="小白入门" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          小白入门
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%B0%8F%E7%99%BD%E5%85%A5%E9%97%A8/EOS%20%E5%AE%89%E8%A3%85%E6%9C%AC%E5%9C%B0%E7%8E%AF%E5%A2%83%EF%BC%8C%E5%B9%B6%E5%AE%9E%E7%8E%B0%E5%8F%91%E5%B8%81%E8%BD%AC%E8%B4%A6%E7%AD%89%E5%8A%9F%E8%83%BD/" class="md-nav__link">
+        EOS 安装本地环境，并实现发币转账等功能
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%B0%8F%E7%99%BD%E5%85%A5%E9%97%A8/%E5%9F%BA%E4%BA%8E%20linux%20%E7%9A%84%20eos%20%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84%E5%9D%91%20%281%29/" class="md-nav__link">
+        基于 linux 的 eos 开发中的坑 (1)
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          开发使用
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="开发使用" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          开发使用
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BC%80%E5%8F%91%E4%BD%BF%E7%94%A8/EOS%20%E5%B8%90%E6%88%B7%E6%9D%83%E9%99%90%E6%93%8D%E4%BD%9C%EF%BC%8D%EF%BC%8D%E4%BD%A0%E6%89%BE%E4%B8%8D%E5%88%B0%E7%9A%84%E5%B9%B2%E8%B4%A7%20%28%E5%8E%9F%E5%88%9B%29%20%E7%BB%AD%E9%9B%86-EOS%203.0/" class="md-nav__link">
+        EOS 帐户权限 3.0
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BC%80%E5%8F%91%E4%BD%BF%E7%94%A8/EOS%20%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E4%B9%8B-%E6%9D%83%E9%99%90%E7%9A%84%E4%BD%BF%E7%94%A8%20%28%E4%BD%A0%E7%BB%9D%E5%AF%B9%E6%89%BE%E4%B8%8D%E5%88%B0%E7%9A%84%E5%B9%B2%E8%B4%A7%29/" class="md-nav__link">
+        EOS 权限管理之 权限的使用 (你绝对找不到的干货)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BC%80%E5%8F%91%E4%BD%BF%E7%94%A8/EOS3.0%20%E6%B5%8B%E8%AF%95%E7%BD%91%E7%BB%9C%E7%BB%84%E5%BB%BA-EOS%20%E4%B8%AD%E6%96%87%E7%A4%BE%E5%8C%BA%E7%89%B9%E8%BE%91/" class="md-nav__link">
+        EOS3.0测试网络组建-EOS中文社区特辑
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BC%80%E5%8F%91%E4%BD%BF%E7%94%A8/EOSIO%204.0%E6%B5%8B%E8%AF%95%E7%BD%91%E7%BB%9C%E5%90%AF%E5%8A%A8%E6%95%99%E7%A8%8B/" class="md-nav__link">
+        EOSIO 4.0测试网络启动教程
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BC%80%E5%8F%91%E4%BD%BF%E7%94%A8/EOSIO%20%E8%BD%AC%E5%B8%90%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+        EOSIO 转帐详解
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BC%80%E5%8F%91%E4%BD%BF%E7%94%A8/EOSIO3.0%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/" class="md-nav__link">
+        EOSIO3.0数据库使用指南
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BC%80%E5%8F%91%E4%BD%BF%E7%94%A8/EOS%E5%AD%A6%E4%B9%A0%E9%98%B6%E6%AE%B5%E6%80%A7%E6%80%BB%E7%BB%93/" class="md-nav__link">
+        EOS学习阶段性总结
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          开发工具
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="开发工具" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          开发工具
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/EOS%20%E5%BC%80%E5%8F%91%E7%BB%88%E6%9E%81%E7%A5%9E%E5%99%A8%EF%BC%8Dvscode%20%28%E4%BD%A0%E7%BB%9D%E5%AF%B9%E6%89%BE%E4%B8%8D%E5%88%B0%E7%9A%84%E5%B9%B2%E8%B4%A7%29/" class="md-nav__link">
+        EOS开发终极神器－vscode(你绝对找不到的干货)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/Qt%20Creator%20%E5%BC%80%E5%8F%91%20EOS%203.0%20%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/" class="md-nav__link">
+        下载和安装Qt Creator
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/%E8%B4%A1%E7%8C%AE%E4%B8%80%E4%B8%AA%E6%B5%8B%E8%AF%95%E5%9F%BA%E7%A1%80%E5%8A%9F%E8%83%BD%E7%9A%84%20shell%20%E8%84%9A%E6%9C%AC/" class="md-nav__link">
+        贡献一个测试基础功能的 shell 脚本
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6">
+          智能合约
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="智能合约" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          智能合约
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/EOS%20%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E6%A8%A1%E6%9D%BF%20%28%E4%BA%8C%29/" class="md-nav__link">
+        EOS 智能合约模板 (二)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/EOS%20%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E6%A8%A1%E6%9D%BF/" class="md-nav__link">
+        1.  支持类型说明和调用实例
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/EOS3.0-HelloWorld%E6%95%99%E7%A8%8B/" class="md-nav__link">
+        EOSIO3.0 hello world 从0到1
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/EOS3.0-%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/" class="md-nav__link">
+        EOSIO 3.0 使用指南
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/EOS3.0-%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/" class="md-nav__link">
+        EOSIO 智能合约
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/EOSIO%20%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E6%95%B0%E6%8D%AE%E5%BA%93%E6%BC%94%E7%BB%83/" class="md-nav__link">
+        EOSIO 智能合约数据库演练
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/dice%20%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E5%BA%94%E8%AF%A5%E8%BF%99%E4%B9%88%E7%8E%A9/" class="md-nav__link">
+        1. dice 玩法说明
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/%E5%BF%83%E5%BF%83%E5%BF%B5%E5%BF%B5%E7%9A%84%20Lover%20Wall%203.0%E7%89%88%E6%9C%AC%E6%9D%A5%E4%BA%86%28%E5%8E%9F%E5%88%9B%29/" class="md-nav__link">
+        心心念念的 Lover Wall 3.0版本来了(原创)
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7">
+          精品文章
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="精品文章" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          精品文章
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          一个针对EOSIO区块生产员的DDOS攻击的缓解方案
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        一个针对EOSIO区块生产员的DDOS攻击的缓解方案
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    以下的服务被应用到测试中：
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#portsddos" class="md-nav__link">
+    关闭端口（ports）未必能够保护你能免受DDOS攻击。
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ssdp-ddos" class="md-nav__link">
+    什么是SSDP DDOS攻击？
+  </a>
+  
+    <nav class="md-nav" aria-label="什么是SSDP DDOS攻击？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-ddos-azure-ddos" class="md-nav__link">
+    1. DDOS攻击测试 - 针对于一个应用【Azure DDOS服务】的节点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-ddos-google-googleddos" class="md-nav__link">
+    2. DDOS攻击测试 - 针对于一个应用【Google 云】并采用Google提供的【标准DDOS防卫】的节点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-ddos-aws-ddos" class="md-nav__link">
+    3. DDOS攻击测试 - 针对于一个应用【AWS 标准DDOS防卫盾】的节点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-ddos-google-load-balancing" class="md-nav__link">
+    4. DDOS攻击测试 - 针对于一个应用【Google Load Balancing 服务】 (网络负载平衡器) 的节点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-incapsula-ddos" class="md-nav__link">
+    5. Incapsula DDOS防卫 –（ 正在测试中，即将推出。）
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ddos" class="md-nav__link">
+    缓解DDOS攻击之策略
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    一些额外关于防火墙的设置
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ddos-bgp" class="md-nav__link">
+    终极DDOS防卫 - BGP重路由
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    总体结论
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#httpseosfansiotopics433" class="md-nav__link">
+    本文地址：https://eosfans.io/topics/433
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    以下的服务被应用到测试中：
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#portsddos" class="md-nav__link">
+    关闭端口（ports）未必能够保护你能免受DDOS攻击。
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ssdp-ddos" class="md-nav__link">
+    什么是SSDP DDOS攻击？
+  </a>
+  
+    <nav class="md-nav" aria-label="什么是SSDP DDOS攻击？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-ddos-azure-ddos" class="md-nav__link">
+    1. DDOS攻击测试 - 针对于一个应用【Azure DDOS服务】的节点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-ddos-google-googleddos" class="md-nav__link">
+    2. DDOS攻击测试 - 针对于一个应用【Google 云】并采用Google提供的【标准DDOS防卫】的节点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-ddos-aws-ddos" class="md-nav__link">
+    3. DDOS攻击测试 - 针对于一个应用【AWS 标准DDOS防卫盾】的节点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-ddos-google-load-balancing" class="md-nav__link">
+    4. DDOS攻击测试 - 针对于一个应用【Google Load Balancing 服务】 (网络负载平衡器) 的节点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-incapsula-ddos" class="md-nav__link">
+    5. Incapsula DDOS防卫 –（ 正在测试中，即将推出。）
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ddos" class="md-nav__link">
+    缓解DDOS攻击之策略
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    一些额外关于防火墙的设置
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ddos-bgp" class="md-nav__link">
+    终极DDOS防卫 - BGP重路由
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    总体结论
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#httpseosfansiotopics433" class="md-nav__link">
+    本文地址：https://eosfans.io/topics/433
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  <!--
+  Copyright (c) 2016-2022 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Tags -->
+
+
+<!-- Actions -->
+
+
+<!--
+  Hack: check whether the content contains a h1 headline. If it doesn't, the
+  page title (or respectively site name) is used as the main headline.
+-->
+
+  <h1>一个针对EOSIO区块生产员的DDOS攻击的缓解方案</h1>
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3023358183033336"
+     crossorigin="anonymous"></script>
+<!-- eos-tutorials -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-3023358183033336"
+     data-ad-slot="3442397541"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<!-- Page content -->
+<blockquote>
+<p>本文内容由EOS42提供, 原文链接: https://blog.eos42.io/ddos-mitigation/</p>
+</blockquote>
+<p>本文的目的是为了指导区块生产员如何能保护EOS网络免受DDOS攻击。</p>
+<p>并也提供了一些有关云供应商提供的DDOS保护服务之测试结果。</p>
+<p>未来我们将会继续发布更多能缓解DDOS攻击的测试和结果。</p>
+<h2 id="_1">以下的服务被应用到测试中：</h2>
+<ul>
+<li>一个区块生产员节点，入站端口为8888,9876。</li>
+<li>使用针对端口1234的SSPD攻击来执行DDOS攻击。</li>
+<li>一个DDOS僵尸网络 - 没有提供额外信息</li>
+</ul>
+<p>向已封闭端口进行攻击的原因是为了表明在端口在未打开的情况下之脆弱性。 SSDP攻击发生在网络层，这意味着你的防火墙必须拥有着能够处理所有数据包的能力。</p>
+<h2 id="portsddos">关闭端口（ports）未必能够保护你能免受DDOS攻击。</h2>
+<p>当你从互联网上关闭一个端口时，所有定向于该端口的流量必须被防火墙清除，再此同时将需要一点CPU时间来删除每个请求。那就想像一下，如果你的防火墙正在被多个不同IP的数据包攻击，并且它们是以50 Gbps的速度来访问端口1234的。即使此端口是已关闭的，防火墙也几乎不可能可以处理这么大流量。</p>
+<h2 id="ssdp-ddos">什么是SSDP DDOS攻击？</h2>
+<p>SSDP全称为Simple Service Discovery Protocol（普通服务发现协议），这是一种用于探索网络服务的网络协议。它主要用于连接互联网的Wifi路由器，网络摄像头以及许多其他的IOT设备。SSDP允许电子设备能够利用从UDP端口1900上通过的【通用即插即用（UPNP）】消息来轻松地将连接到其他设备。大多数现代电子设备会提供有关初始设置的简要说明，但是一旦设置好，这些UPNP端口就会向全网公开。</p>
+<p>一个SSDP攻击将会从多个设备向这些有漏洞的物联网设备请求一个【UPNP发现数据包】，这是为了欺骗IP数据包来获取受害者的IP，然后所有的UPNP回应数据包都将会被发送到受害者的IP。</p>
+<p>。SSPD是一种加大功率的攻击如果您向一个这样的设备请求UPNP，它将会回应他全部现有的服务。这一个UPNP数据包请求将会被分成多个回应数据包，并且都将会被发送回受害设备的IP。</p>
+<p><img alt="DDOS攻击场景" src="https://eosfans-static.strahe.com/photo/2018/2db6ceb2-9bde-4eae-ad5b-6897bf957c35.png?x-oss-process=image/resize,w_1920" />
+<DDOS攻击场景> 图片由https://www.corero.com/提供</p>
+<h3 id="1-ddos-azure-ddos">1. DDOS攻击测试 - 针对于一个应用【Azure DDOS服务】的节点</h3>
+<blockquote>
+<p>说明：此测试是针对于一个在Azure的标准规格DDOS防卫服务上运行的节点，这是他们 提供的最高保护级别。</p>
+</blockquote>
+<p>DDOS防卫方式：Azure规格（https://docs.microsoft.com/en-us/azure/virtual-network/ddos-protection-overview）</p>
+<p>DDOS类型：速率为50Gbps的 SSPD</p>
+<p>云提供商：微软Azure</p>
+<p>BP节点类型：云</p>
+<p>下图：从下面的结果可以看出，IP地址在被攻击期间没有太多反应。</p>
+<p><img alt="" src="https://eosfans-static.strahe.com/photo/2018/bf04df57-f685-4b6e-b501-7e29ab434a97.png?x-oss-process=image/resize,w_1920" /></p>
+<p>Azure DDOS显示节点在攻击的高峰期收到了大约6.25 GB / s（50 Gbp / s）的流量，节点只能抵挡住5.18 GB / s（41.44 Gbp / s）的流量。</p>
+<p><img alt="" src="https://eosfans-static.strahe.com/photo/2018/76f5c4a0-34e9-4dd3-8ccc-494978e2e6b1.png?x-oss-process=image/resize,w_1920" /></p>
+<p>总结：Azure能够做到一些保护，但它不能阻止一套完整的攻击，并且这套保护服务漏出了一个足够能将你IP地址以及在此IP上运行的服务丢失的数据包的数量。当受到攻击时，此节点无法正常地同步。</p>
+<p>总体结果：抵抗失败</p>
+<h3 id="2-ddos-google-googleddos">2. DDOS攻击测试 - 针对于一个应用【Google 云】并采用Google提供的【标准DDOS防卫】的节点</h3>
+<blockquote>
+<p>说明：此测试是针对于一个在Google的标准规格DDOS防卫服务上运行的节点，这是他们提供的最高保护级别。</p>
+</blockquote>
+<p>DDOS防卫方式：谷歌云标准</p>
+<p>DDOS类型：速率为50Gbps的SSPD</p>
+<p>云提供商：Google</p>
+<p>BP节点的类型：云</p>
+<p>*此不是一个针对于Google Shield的测试。</p>
+<p><img alt="" src="https://eosfans-static.strahe.com/photo/2018/e49f0e8e-254f-4bd8-9b7c-b53272f56510.png?x-oss-process=image/resize,w_1920" /></p>
+<p>总结：Google Cloud做到了一些保护，但总的来说，节点无法正确地与区块链同步。在这其中实在是存在着太多的延迟以及丢失的数据包了，这也导致了节点无法正确同步。</p>
+<p>总体结果：抵抗失败</p>
+<h3 id="3-ddos-aws-ddos">3. DDOS攻击测试 - 针对于一个应用【AWS 标准DDOS防卫盾】的节点</h3>
+<blockquote>
+<p>说明：此测试是针对于一个在AWS的标准规格DDOS防卫服务上运行的节点（免费的服务），这是他们提供的保护级别中最低的一级。</p>
+</blockquote>
+<p>DDOS防卫方式：AWS 标准DDOS防卫盾（https://aws.amazon.com/shield/tiers/）</p>
+<p>DDOS类型：速率为50Gbps的SSPD</p>
+<p>云提供商：AWS（亚马孙）</p>
+<p>BP节点的类型：云</p>
+<p><img alt="" src="https://eosfans-static.strahe.com/photo/2018/bd183625-994e-40ba-83f5-f32a8f44998a.png?x-oss-process=image/resize,w_1920" /></p>
+<p>结论：AWS提供了一些保护，但整体来说节点仍然会崩溃并且无法与区块链同步。同样先前一样，因为存在着太多的延迟以及丢失的数据包，导致了节点无法正确同步。</p>
+<p>总体结果：抵抗失败</p>
+<h3 id="4-ddos-google-load-balancing">4. DDOS攻击测试 - 针对于一个应用【Google Load Balancing 服务】 (网络负载平衡器) 的节点</h3>
+<blockquote>
+<p>说明：在这测试其中，使用了一个向外部公开IP地址的Google网络负载均衡器，它将 TCP端口8888和9876上的流量负载平衡到两个运行在内部IP上的EOS节点。</p>
+</blockquote>
+<p>DDOS防卫方式：Google网络负载均衡器</p>
+<p>DDOS类型：速率为50Gbps的 SSPD</p>
+<p>云提供商：Google</p>
+<p>BP节点的类型：云</p>
+<p><img alt="" src="https://eosfans-static.strahe.com/photo/2018/eb3d6f55-377f-49a0-b74a-9d392cdc38af.png?x-oss-process=image/resize,w_1920" /></p>
+<p><img alt="" src="https://eosfans-static.strahe.com/photo/2018/d5ac9c1d-205a-455e-8bf3-c8e7156b25ec.png?x-oss-process=image/resize,w_1920" /></p>
+<p>结论：Google负载均衡器承受了所有DDoS数据包，并没有影响任何传入流量。所有节点都能正确地与网络同步。</p>
+<p>总结：抵抗成功</p>
+<h3 id="5-incapsula-ddos">5. Incapsula DDOS防卫 –（ 正在测试中，即将推出。）</h3>
+<h2 id="ddos">缓解DDOS攻击之策略</h2>
+<p>以下是一些关于如何保护自己免受DDoS攻击的指南。</p>
+<p>• 将节点进行监视，并计划一个【故障转移方案】
+最可靠与便利的方法是主动地对节点和网络进行监视，以便在受到攻击时你能随时将生产员密钥迁移到运行在其他IP或网络的节点上。</p>
+<p>• 不要创建DNS记录
+不要为你的区块生产员创建DNS记录。利用蛮力来扫描连接着一个域名地址记录是一个非常基本的手段。因为攻击者可能会提前收集相关的数据，请更改你之前在测试网中使用过的所有IP。</p>
+<p>• 使用【Google负载平衡服务】
+目前，根据EOS42的对各种云服务的研究，Google负载平衡服务可提供足够的DDoS保护。</p>
+<p>• 不要在互联网上允许任何指向到你区块生成器的【传入连接】
+以禁止【传入连接】的手段，亦指你区块生成器的IP是隐藏的。除非攻击者了解你的IP地址，否则他就不能执行攻击。</p>
+<p>• 对于那些采用裸金属设备的用户们 – 请购买一个【TCP / UDP DDOS代理保护服务】或使用【Google负载平衡器】
+通过这种类的服务，你可以将所有流量转发给区块生成器，并将防火墙配置为仅接受来自DDOS代理IP的流量。你的外部IP仍将暴露，不过因为所以的传入连接都将是通过DDOS代理服务而流入的，所以这个方案提供了一个额外的安全层，</p>
+<p>请注意，上述的方法都不是完美的解决方案，因为对DDOS攻击的预防是一个非常困难的任务。</p>
+<h2 id="_2">一些额外关于防火墙的设置</h2>
+<p>• 连接限制：设定有限的新连接请求，首选现有连接。
+• 年龄过滤：空闲的连接将从IP列表上删除掉。
+• 源码率过滤：当与DDoS攻击关联的IP地址数量是有限的时候，不符合标准的外部IP地址将会可以轻易地被识别。
+• 动态过滤：创建一个短期过滤规则，并在一时间段后将其删除。</p>
+<h2 id="ddos-bgp">终极DDOS防卫 - BGP重路由</h2>
+<p>如果你有幸拥有一个C类子网和可以处理BGP路由的设备，你可以和一个DDOS擦洗服务合作。</p>
+<p>在这种情况下，如果发生DDoS攻击，你将会把你的BGP路径重新发布并通过第三方机构把流量转发到你的IP地址，这将把所有的DDOS数据包擦洗掉（scrubbing），并且只有干净的数据包会传回你的网络。</p>
+<p>不幸的是，由于C类子网的高成本以及相关需求规格，目前来说这个方案对我们大多数人来说都是遥不可及的。</p>
+<h2 id="_3">总体结论</h2>
+<p>我希望这篇文章能够在社区对于如何防范DDOS攻击的方面做到一点启发。</p>
+<p>从现在起到6月2日，EOS42将对社区提供免费的DDOS防御测试。如果你想测试节点，请通过电子邮件<code>charles@eos42.io</code>或电报Telegram <code>@ankh2054</code>联系我。</p>
+<p>所有测试的结果都将会是保密的。</p>
+<p>作者：Charles Holtzkampf</p>
+<p>（此文章原意以英文为准。- https://blog.eos42.io/ddos-mitigation/）</p>
+<p>EOS42电报群: https://t.me/EOS42</p>
+<p>EOS42微博: https://weibo.com/eos42</p>
+<h2 id="httpseosfansiotopics433">本文地址：https://eosfans.io/topics/433</h2>
+
+<!-- Source file information -->
+
+
+<!-- Was this page helpful? -->
+
+
+
+
+<!-- Comment system -->
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../../%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/%E5%BF%83%E5%BF%83%E5%BF%B5%E5%BF%B5%E7%9A%84%20Lover%20Wall%203.0%E7%89%88%E6%9C%AC%E6%9D%A5%E4%BA%86%28%E5%8E%9F%E5%88%9B%29/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 心心念念的 Lover Wall 3.0版本来了(原创)" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              心心念念的 Lover Wall 3.0版本来了(原创)
+            </div>
+          </div>
+        </a>
+      
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.8492ddcf.min.js"></script>
+      
+    
+  </body>
+</html>

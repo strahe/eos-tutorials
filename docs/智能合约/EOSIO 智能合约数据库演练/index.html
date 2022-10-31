@@ -1,0 +1,1374 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.1, mkdocs-material-8.5.7">
+    
+    
+      
+        <title>EOSIO 智能合约数据库演练 - EOS Tutorials</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.20d9efc8.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#eosio" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="EOS Tutorials" class="md-header__button md-logo" aria-label="EOS Tutorials" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            EOS Tutorials
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              EOSIO 智能合约数据库演练
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="EOS Tutorials" class="md-nav__button md-logo" aria-label="EOS Tutorials" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    EOS Tutorials
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        eos-tutorials
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Cleos
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Cleos" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Cleos
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cleos/EOS%20Dawn%203.0%20cleos%20%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/" class="md-nav__link">
+        创建缺省wallet
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cleos/cleos%20%E5%91%BD%E4%BB%A4%E5%A4%A7%E5%85%A8%E4%B9%8B%20wallet%20%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        cleos 钱包命令
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          小白入门
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="小白入门" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          小白入门
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%B0%8F%E7%99%BD%E5%85%A5%E9%97%A8/EOS%20%E5%AE%89%E8%A3%85%E6%9C%AC%E5%9C%B0%E7%8E%AF%E5%A2%83%EF%BC%8C%E5%B9%B6%E5%AE%9E%E7%8E%B0%E5%8F%91%E5%B8%81%E8%BD%AC%E8%B4%A6%E7%AD%89%E5%8A%9F%E8%83%BD/" class="md-nav__link">
+        EOS 安装本地环境，并实现发币转账等功能
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%B0%8F%E7%99%BD%E5%85%A5%E9%97%A8/%E5%9F%BA%E4%BA%8E%20linux%20%E7%9A%84%20eos%20%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84%E5%9D%91%20%281%29/" class="md-nav__link">
+        基于 linux 的 eos 开发中的坑 (1)
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          开发使用
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="开发使用" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          开发使用
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BC%80%E5%8F%91%E4%BD%BF%E7%94%A8/EOS%20%E5%B8%90%E6%88%B7%E6%9D%83%E9%99%90%E6%93%8D%E4%BD%9C%EF%BC%8D%EF%BC%8D%E4%BD%A0%E6%89%BE%E4%B8%8D%E5%88%B0%E7%9A%84%E5%B9%B2%E8%B4%A7%20%28%E5%8E%9F%E5%88%9B%29%20%E7%BB%AD%E9%9B%86-EOS%203.0/" class="md-nav__link">
+        EOS 帐户权限 3.0
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BC%80%E5%8F%91%E4%BD%BF%E7%94%A8/EOS%20%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E4%B9%8B-%E6%9D%83%E9%99%90%E7%9A%84%E4%BD%BF%E7%94%A8%20%28%E4%BD%A0%E7%BB%9D%E5%AF%B9%E6%89%BE%E4%B8%8D%E5%88%B0%E7%9A%84%E5%B9%B2%E8%B4%A7%29/" class="md-nav__link">
+        EOS 权限管理之 权限的使用 (你绝对找不到的干货)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BC%80%E5%8F%91%E4%BD%BF%E7%94%A8/EOS3.0%20%E6%B5%8B%E8%AF%95%E7%BD%91%E7%BB%9C%E7%BB%84%E5%BB%BA-EOS%20%E4%B8%AD%E6%96%87%E7%A4%BE%E5%8C%BA%E7%89%B9%E8%BE%91/" class="md-nav__link">
+        EOS3.0测试网络组建-EOS中文社区特辑
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BC%80%E5%8F%91%E4%BD%BF%E7%94%A8/EOSIO%204.0%E6%B5%8B%E8%AF%95%E7%BD%91%E7%BB%9C%E5%90%AF%E5%8A%A8%E6%95%99%E7%A8%8B/" class="md-nav__link">
+        EOSIO 4.0测试网络启动教程
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BC%80%E5%8F%91%E4%BD%BF%E7%94%A8/EOSIO%20%E8%BD%AC%E5%B8%90%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+        EOSIO 转帐详解
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BC%80%E5%8F%91%E4%BD%BF%E7%94%A8/EOSIO3.0%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/" class="md-nav__link">
+        EOSIO3.0数据库使用指南
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BC%80%E5%8F%91%E4%BD%BF%E7%94%A8/EOS%E5%AD%A6%E4%B9%A0%E9%98%B6%E6%AE%B5%E6%80%A7%E6%80%BB%E7%BB%93/" class="md-nav__link">
+        EOS学习阶段性总结
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          开发工具
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="开发工具" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          开发工具
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/EOS%20%E5%BC%80%E5%8F%91%E7%BB%88%E6%9E%81%E7%A5%9E%E5%99%A8%EF%BC%8Dvscode%20%28%E4%BD%A0%E7%BB%9D%E5%AF%B9%E6%89%BE%E4%B8%8D%E5%88%B0%E7%9A%84%E5%B9%B2%E8%B4%A7%29/" class="md-nav__link">
+        EOS开发终极神器－vscode(你绝对找不到的干货)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/Qt%20Creator%20%E5%BC%80%E5%8F%91%20EOS%203.0%20%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/" class="md-nav__link">
+        下载和安装Qt Creator
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/%E8%B4%A1%E7%8C%AE%E4%B8%80%E4%B8%AA%E6%B5%8B%E8%AF%95%E5%9F%BA%E7%A1%80%E5%8A%9F%E8%83%BD%E7%9A%84%20shell%20%E8%84%9A%E6%9C%AC/" class="md-nav__link">
+        贡献一个测试基础功能的 shell 脚本
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6">
+          智能合约
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="智能合约" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          智能合约
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../EOS%20%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E6%A8%A1%E6%9D%BF%20%28%E4%BA%8C%29/" class="md-nav__link">
+        EOS 智能合约模板 (二)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../EOS%20%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E6%A8%A1%E6%9D%BF/" class="md-nav__link">
+        1.  支持类型说明和调用实例
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../EOS3.0-HelloWorld%E6%95%99%E7%A8%8B/" class="md-nav__link">
+        EOSIO3.0 hello world 从0到1
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../EOS3.0-%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/" class="md-nav__link">
+        EOSIO 3.0 使用指南
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../EOS3.0-%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/" class="md-nav__link">
+        EOSIO 智能合约
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          EOSIO 智能合约数据库演练
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        EOSIO 智能合约数据库演练
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    目录
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    新增
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    查询
+  </a>
+  
+    <nav class="md-nav" aria-label="查询">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    主键查询
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    二级索引查询
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    更改
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    删除数据
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dice%20%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E5%BA%94%E8%AF%A5%E8%BF%99%E4%B9%88%E7%8E%A9/" class="md-nav__link">
+        1. dice 玩法说明
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%BF%83%E5%BF%83%E5%BF%B5%E5%BF%B5%E7%9A%84%20Lover%20Wall%203.0%E7%89%88%E6%9C%AC%E6%9D%A5%E4%BA%86%28%E5%8E%9F%E5%88%9B%29/" class="md-nav__link">
+        心心念念的 Lover Wall 3.0版本来了(原创)
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7">
+          精品文章
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="精品文章" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          精品文章
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%B2%BE%E5%93%81%E6%96%87%E7%AB%A0/%E4%B8%80%E4%B8%AA%E9%92%88%E5%AF%B9EOSIO%E5%8C%BA%E5%9D%97%E7%94%9F%E4%BA%A7%E5%91%98%E7%9A%84DDOS%E6%94%BB%E5%87%BB%E7%9A%84%E7%BC%93%E8%A7%A3%E6%96%B9%E6%A1%88/" class="md-nav__link">
+        一个针对EOSIO区块生产员的DDOS攻击的缓解方案
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    目录
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    新增
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    查询
+  </a>
+  
+    <nav class="md-nav" aria-label="查询">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    主键查询
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    二级索引查询
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    更改
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    删除数据
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  <!--
+  Copyright (c) 2016-2022 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Tags -->
+
+
+<!-- Actions -->
+
+
+<!--
+  Hack: check whether the content contains a h1 headline. If it doesn't, the
+  page title (or respectively site name) is used as the main headline.
+-->
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3023358183033336"
+     crossorigin="anonymous"></script>
+<!-- eos-tutorials -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-3023358183033336"
+     data-ad-slot="3442397541"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<!-- Page content -->
+<h1 id="eosio">EOSIO 智能合约数据库演练</h1>
+<blockquote>
+<p>前几天翻译了一篇关于EOS智能合约数据库的内容，今天来演示一下数据库的使用方法。</p>
+</blockquote>
+<h2 id="_1">目录</h2>
+<ol>
+<li>增</li>
+<li>查</li>
+<li>改</li>
+<li>删</li>
+</ol>
+<h2 id="_2">新增</h2>
+<p>新增内容往往用到<code>emplace</code>构造函数，来进行数据库对象的新增。</p>
+<p>.cpp</p>
+<pre><code>void test_da::create(account_name user, string title, string content)
+    {
+        require_auth( user ); //验证权限
+        das datable( _self, user);　//定义数据库对象
+        datable.emplace(user, [&amp;]( da &amp; d){
+            d.title = title;
+            d.content = content;
+            d.post_id = datable.available_primary_key();
+            d.poster = user;
+        });　//数据库内容创建
+    }
+</code></pre>
+<p>这里需要注意的是：   </p>
+<ol>
+<li>定义数据库对象，　其中第一个参数是合约的拥有者_self，第二个变量就是数据库的<code>payer</code>，也就是数据库是谁的，数据库存储在谁的账户下。</li>
+<li>emplace函数接收两个参数，一个<code>payer</code>,和一个<code>lamada</code>表达式。这个结构是固定的。</li>
+</ol>
+<p>那么我们现在来看一下我们的<code>test_da</code>类是怎么定义的。</p>
+<p>.hpp　</p>
+<pre><code>class test_da : public contract {
+     public:
+           test_da( account_name self ):contract(self){}
+
+           // @abi action
+           void create(account_name user, string title, string content);
+
+     private:
+           // @abi table data i64
+           struct da {
+                 uint64_t     post_id;
+                 account_name poster;
+                 string       title;
+                 string       content;
+
+                 uint64_t primary_key()const { return post_id; }
+                 account_name get_poster() const { return poster; }
+
+                 EOSLIB_SERIALIZE(da, (post_id)(poster)(title)(content))
+           };
+           typedef eosio::multi_index&lt;N(data), da, indexed_by&lt;N(byposter), const_mem_fun&lt;da, account_name, &amp;da::get_poster&gt;&gt; &gt; das;
+  };
+} /// namespace eosio
+</code></pre>
+<ol>
+<li>所有的智能合约都继承自<code>contract</code>合约。<code>test_da( account_name self ):contract(self){}</code>是<code>test_da</code>合约的构造函数。</li>
+<li>下面是对<code>create</code>函数的声明。</li>
+<li>接下来是对数据字段的定义。这里我们定义了数据结构<code>da</code>.</li>
+<li><code>primary_key</code>函数是定义主键的函数。　</li>
+<li>接下来我们定义了辅助主键返回<code>poster</code>。</li>
+<li><code>EOSLIB_SERIALIZE</code>宏的第一个参数是数据结构，其他参数是数据结构中的数据成员。</li>
+<li><code>typedef</code>我们在这里定义了一个名字为<code>das</code>的类型，它用来定义数据库对象。这里我们定义的是一个具有主键及一个辅助键的数据库对象。
+.abi　
+abi 非常重要，错误的<code>abi</code>会导致合约执行失败。</li>
+</ol>
+<pre><code>{
+  &quot;types&quot;: [],
+  &quot;structs&quot;: [{
+      &quot;name&quot;: &quot;da&quot;,
+      &quot;base&quot;: &quot;&quot;,
+      &quot;fields&quot;: [{
+          &quot;name&quot;: &quot;post_id&quot;,
+          &quot;type&quot;: &quot;uint64&quot;
+        },{
+          &quot;name&quot;: &quot;poster&quot;,
+          &quot;type&quot;: &quot;account_name&quot;
+        },{
+          &quot;name&quot;: &quot;title&quot;,
+          &quot;type&quot;: &quot;string&quot;
+        },{
+          &quot;name&quot;: &quot;content&quot;,
+          &quot;type&quot;: &quot;string&quot;
+        }
+      ]
+    },{
+      &quot;name&quot;: &quot;create&quot;,
+      &quot;base&quot;: &quot;&quot;,
+      &quot;fields&quot;: [{
+          &quot;name&quot;: &quot;user&quot;,
+          &quot;type&quot;: &quot;account_name&quot;
+        },{
+          &quot;name&quot;: &quot;title&quot;,
+          &quot;type&quot;: &quot;string&quot;
+        },{
+          &quot;name&quot;: &quot;content&quot;,
+          &quot;type&quot;: &quot;string&quot;
+        }
+      ]
+    }}
+  ],
+  &quot;actions&quot;: [{
+          &quot;name&quot;: &quot;create&quot;,
+          &quot;type&quot;: &quot;create&quot;,
+        }
+  ],
+  &quot;tables&quot;: [{
+      &quot;name&quot;: &quot;data&quot;,
+      &quot;index_type&quot;: &quot;i64&quot;,
+      &quot;key_names&quot;: [
+        &quot;post_id&quot;
+      ],
+      &quot;key_types&quot;: [
+        &quot;uint64&quot;
+      ],
+      &quot;type&quot;: &quot;da&quot;
+    }
+  ],
+  &quot;ricardian_clauses&quot;: []
+}
+</code></pre>
+<p>接下来来演示一下:
+1. 发布合约</p>
+<pre><code>cleos set contract eosio test_da/
+Reading WAST/WASM from test_da/test_da.wasm...
+Using already assembled WASM...
+Publishing contract...
+executed transaction: 3d6f04278617d3807fe876a33057f1155acf9c9e5a392ac6ed8ad51e79506009  6752 bytes  24679 us
+#         eosio &lt;= eosio::setcode               {&quot;account&quot;:&quot;eosio&quot;,&quot;vmtype&quot;:0,&quot;vmversion&quot;:0,&quot;code&quot;:&quot;0061736d0100000001ad011a60037f7e7e0060057f7e7e7f...
+#         eosio &lt;= eosio::setabi                {&quot;account&quot;:&quot;eosio&quot;,&quot;abi&quot;:{&quot;types&quot;:[],&quot;structs&quot;:[{&quot;name&quot;:&quot;da&quot;,&quot;base&quot;:&quot;&quot;,&quot;fields&quot;:[{&quot;name&quot;:&quot;post_id&quot;,&quot;...
+</code></pre>
+<ol>
+<li>创建数据</li>
+</ol>
+<pre><code>cleos push action eosio create '{&quot;user&quot;:&quot;eosio&quot;,&quot;title&quot;:&quot;first&quot;,&quot;content&quot;:&quot;create a first one&quot;}' -p eosio
+executed transaction: 830057f270fa499b1d61b82e80ad8cda1774cdc1786c1e786f558a3e0a48974c  216 bytes  17229 us
+#         eosio &lt;= eosio::create                {&quot;user&quot;:&quot;eosio&quot;,&quot;title&quot;:&quot;first&quot;,&quot;content&quot;:&quot;create a first one&quot;}
+</code></pre>
+<p>下面我们来查一下数据表：</p>
+<pre><code>cleos get table eosio eosio data
+{
+  &quot;rows&quot;: [{
+      &quot;post_id&quot;: 0,
+      &quot;poster&quot;: &quot;eosio&quot;,
+      &quot;title&quot;: &quot;first&quot;,
+      &quot;content&quot;: &quot;create a first one&quot;
+    }
+  ],
+  &quot;more&quot;: false
+}
+</code></pre>
+<p>创建信息成功，那么我们用别的账号创建会怎样呢？</p>
+<pre><code>cleos push action eosio create '{&quot;user&quot;:&quot;eostea&quot;,&quot;title&quot;:&quot;eostea first&quot;,&quot;content&quot;:&quot;eostea create a first one&quot;}' -p eostea
+executed transaction: 8542a87e563a9c62b7dbe46ae09ccf829c7821f8879167066b658096718de148  232 bytes  2243 us
+#         eosio &lt;= eosio::create                {&quot;user&quot;:&quot;eostea&quot;,&quot;title&quot;:&quot;eostea first&quot;,&quot;content&quot;:&quot;eostea create a first one&quot;}
+</code></pre>
+<p>查看数据表：</p>
+<pre><code>cleos get table eosio eostea data
+{
+  &quot;rows&quot;: [{
+      &quot;post_id&quot;: 0,
+      &quot;poster&quot;: &quot;eostea&quot;,
+      &quot;title&quot;: &quot;eostea first&quot;,
+      &quot;content&quot;: &quot;eostea create a first one&quot;
+    }
+  ],
+  &quot;more&quot;: false
+}
+</code></pre>
+<p>到这里，相信大家对创建数据已经没有什么疑惑了。</p>
+<h2 id="_3">查询</h2>
+<p>对于数据库，最重要的功能就是查询，如果没有查询功能，数据库里的数据就不能呈现，也就没有意义。查询数据库主要分为两方面，一方面是主键查询，一方面是通过二级索引查询。
+这里为了使表中数据多样化我会做一些修改，将所有数据都合到一张表中。
+我将以上<code>.cpp</code>中的<code>das datable( _self, user);</code>改为<code>das datable( _self, _self);</code>.这样数据都存在合约账户的表中。</p>
+<h3 id="_4">主键查询</h3>
+<p>这里我添加了一个方法来查询数据并打印：</p>
+<pre><code>void test_da::getd(uint64_t post_id){
+        das datable(_self, _self);
+        auto post_da = datable.find( post_id);
+        eosio::print(&quot;Post_id: &quot;, post_da-&gt;post_id, &quot;  Post_Tile: &quot;, post_da-&gt;title.c_str(), &quot; Content: &quot;, post_da-&gt;content.c_str());
+    }
+</code></pre>
+<p>abi文件也做了相应的调整：</p>
+<p>执行：</p>
+<pre><code>cleos push action eosio getd '{&quot;post_id&quot;:1}' -p eosio
+executed transaction: ac8663235462d947c74542af848cca54a059c3991d193237025da7d4767d6725  192 bytes  1724 us
+#         eosio &lt;= eosio::getd                  {&quot;post_id&quot;:1}
+&gt;&gt; Post_id: 1  Post_Tile: first Content: eosio create a first one
+</code></pre>
+<h3 id="_5">二级索引查询</h3>
+<p>添加二级索引查询代码如下：</p>
+<pre><code>auto poster_index = datable.template get_index&lt;N(byposter)&gt;();
+auto pos = poster_index.find( user );
+
+for (; pos != poster_index.end(); pos++)
+{
+    eosio::print(&quot;content:&quot;, pos-&gt;content.c_str(), &quot; post_id:&quot;, pos-&gt;post_id, &quot; title:&quot;, pos-&gt;title.c_str());
+}
+</code></pre>
+<p>获取二级索引并获取数据，这里我只用了find查询，其他查询就不在一一介绍。</p>
+<p>执行<code>getd</code>操作：</p>
+<pre><code>cleos push action eosio getd '{&quot;post_id&quot;:2,&quot;user&quot;: &quot;eostea&quot;}' -p eosio
+executed transaction: 2370e1fb1ee8a581f7321f02fb40645e51269e579d183c33ef470dba0b3afdbc  200 bytes  5403 us
+#         eosio &lt;= eosio::getd                  {&quot;post_id&quot;:2,&quot;user&quot;:&quot;eostea&quot;}
+&gt;&gt; Post_id: 2  Post_Tile: eostea first Content: eostea create a first onecontent:eostea create a first one post_id:2 title:eostea first
+</code></pre>
+<p>数据库中数据如下：</p>
+<pre><code>cleos get table eosio eosio data
+{
+ &quot;rows&quot;: [{
+     &quot;post_id&quot;: 0,
+     &quot;poster&quot;: &quot;eosio&quot;,
+     &quot;title&quot;: &quot;first&quot;,
+     &quot;content&quot;: &quot;eostea create a first one&quot;
+   },{
+     &quot;post_id&quot;: 1,
+     &quot;poster&quot;: &quot;eosio&quot;,
+     &quot;title&quot;: &quot;first&quot;,
+     &quot;content&quot;: &quot;eostea create a first one&quot;
+   },{
+     &quot;post_id&quot;: 2,
+     &quot;poster&quot;: &quot;eostea&quot;,
+     &quot;title&quot;: &quot;eostea first&quot;,
+     &quot;content&quot;: &quot;eostea create a first one&quot;
+   }
+ ],
+ &quot;more&quot;: false
+}
+</code></pre>
+<h2 id="_6">更改</h2>
+<p>更改数据库内容。
+这里我们先看一下目前的数据库内容。</p>
+<pre><code>cleos get table eosio eosio data
+{
+ &quot;rows&quot;: [{
+     &quot;post_id&quot;: 0,
+     &quot;poster&quot;: &quot;eosio&quot;,
+     &quot;title&quot;: &quot;first&quot;,
+     &quot;content&quot;: &quot;eostea create a first one&quot;
+   },{
+     &quot;post_id&quot;: 1,
+     &quot;poster&quot;: &quot;eosio&quot;,
+     &quot;title&quot;: &quot;first&quot;,
+     &quot;content&quot;: &quot;eostea create a first one&quot;
+   },{
+     &quot;post_id&quot;: 2,
+     &quot;poster&quot;: &quot;eostea&quot;,
+     &quot;title&quot;: &quot;eostea first&quot;,
+     &quot;content&quot;: &quot;eostea create a first one&quot;
+   }
+ ],
+ &quot;more&quot;: false
+}
+</code></pre>
+<p>写一个更改数据的<code>action</code>代码如下：</p>
+<pre><code>void test_da::change(account_name user, uint64_t post_id, string title, string content)
+    {
+        require_auth(user);
+        das datable( _self, user);
+        auto post = datable.find(post_id);
+        eosio_assert(post-&gt;poster == user, &quot;yonghucuowu&quot;);
+        datable.modify(post, user, [&amp;](auto&amp; p){
+            if (title != &quot;&quot;)
+                p.title = title;
+            if (content != &quot;&quot;)
+                p.content = content;
+        });
+    }
+</code></pre>
+<p>1.　前几行代码已经之前讲解过，现在直接说<code>modify</code>方法，他的第一个参数是你查询出的要更改的对象，第二个参数是<code>payer</code>,其他的不用多说。
+下面我们执行一下命令：</p>
+<pre><code>cleos push action eosio change '{&quot;user&quot;:&quot;eosio&quot;,&quot;post_id&quot;:1,&quot;title&quot;:&quot;change&quot;,&quot;content&quot;:&quot;change action&quot;}' -p eosio
+executed transaction: 8cb561a712f2741560118651aefd49efd161e3d73c56f6d24cf1d699c265e2dc  224 bytes  2130 us
+#         eosio &lt;= eosio::change                {&quot;user&quot;:&quot;eosio&quot;,&quot;post_id&quot;:1,&quot;title&quot;:&quot;change&quot;,&quot;content&quot;:&quot;change action&quot;}
+</code></pre>
+<p>下面我们看一下数据库：</p>
+<pre><code>cleos get table eosio eosio data
+{
+  &quot;rows&quot;: [{
+      &quot;post_id&quot;: 0,
+      &quot;poster&quot;: &quot;eosio&quot;,
+      &quot;title&quot;: &quot;first&quot;,
+      &quot;content&quot;: &quot;eostea create a first one&quot;
+    },{
+      &quot;post_id&quot;: 1,
+      &quot;poster&quot;: &quot;eosio&quot;,
+      &quot;title&quot;: &quot;change&quot;,
+      &quot;content&quot;: &quot;change action&quot;
+    },{
+      &quot;post_id&quot;: 2,
+      &quot;poster&quot;: &quot;eostea&quot;,
+      &quot;title&quot;: &quot;eostea first&quot;,
+      &quot;content&quot;: &quot;eostea create a first one&quot;
+    }
+  ],
+  &quot;more&quot;: false
+}
+</code></pre>
+<p>post_id=1的记录已经被改变，说明我们成功了。</p>
+<h2 id="_7">删除数据</h2>
+<p>删除数据我又加了一个<code>action</code>,如下所示：</p>
+<pre><code>void test_da::dele(account_name user, uint64_t post_id)
+    {
+        require_auth(user);
+        das datable( _self, user);
+        auto post = datable.find(post_id);
+        eosio::print(post-&gt;title.c_str());
+
+        eosio_assert(post-&gt;poster == user, &quot;yonghucuowu&quot;);
+        datable.erase(post);
+    }
+</code></pre>
+<p>这里调用了<code>erase</code>方法删除数据，参数为一个数据对象。下面我们来看一下执行结果：</p>
+<pre><code>cleos push action eosio dele '{&quot;user&quot;:&quot;eosio&quot;,&quot;post_id&quot;:1}' -p eosioexecuted transaction: 3affbbbbd1da328ddcf37753f1f2f6c5ecc36cd81a0e12fea0c789e75b59714e  200 bytes  2383 us
+#         eosio &lt;= eosio::dele                  {&quot;user&quot;:&quot;eosio&quot;,&quot;post_id&quot;:1}
+</code></pre>
+<p>现在再来看一下我们的数据库：</p>
+<pre><code>cleos get table eosio eosio data
+{
+  &quot;rows&quot;: [{
+      &quot;post_id&quot;: 0,
+      &quot;poster&quot;: &quot;eosio&quot;,
+      &quot;title&quot;: &quot;first&quot;,
+      &quot;content&quot;: &quot;eostea create a first one&quot;
+    },{
+      &quot;post_id&quot;: 2,
+      &quot;poster&quot;: &quot;eostea&quot;,
+      &quot;title&quot;: &quot;eostea first&quot;,
+      &quot;content&quot;: &quot;eostea create a first one&quot;
+    }
+  ],
+  &quot;more&quot;: false
+}
+</code></pre>
+<p>post_id=1的数据已经被我们删除。</p>
+<p>到这里，数据库的增删改查已经讲解完毕。
+本文内容为原创内容，如需转载请联系作者。谢谢！！！</p>
+
+<!-- Source file information -->
+
+
+<!-- Was this page helpful? -->
+
+
+
+
+<!-- Comment system -->
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../EOS3.0-%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/" class="md-footer__link md-footer__link--prev" aria-label="Previous: EOSIO 智能合约" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              EOSIO 智能合约
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../dice%20%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E5%BA%94%E8%AF%A5%E8%BF%99%E4%B9%88%E7%8E%A9/" class="md-footer__link md-footer__link--next" aria-label="Next: 1. dice 玩法说明" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              1. dice 玩法说明
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.8492ddcf.min.js"></script>
+      
+    
+  </body>
+</html>

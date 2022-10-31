@@ -1,0 +1,5 @@
+site_name: EOS Tutorials
+theme:
+  name: material
+  custom_dir: overrides
+docs_dir: src
